@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230721_011500
+      author: kerich
+      changes:
+        - createTable:
+            schemaName: movie
+            tableName: translators
+            columns:
+              - column:
+                  name: id_translator
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: full_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false

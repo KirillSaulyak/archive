@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230721_010300
+      author: kerich
+      changes:
+        - createTable:
+            schemaName: movie
+            tableName: countries
+            columns:
+              - column:
+                  name: id_country
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false

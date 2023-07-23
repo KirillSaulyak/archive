@@ -1,0 +1,106 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230721_155600
+      author: kerich
+      changes:
+        - createTable:
+            schemaName: movie
+            tableName: movie
+            columns:
+              - column:
+                  name: id_movie
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: movie_release
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name_another
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: movie_types_id_movie_type
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_movie_types
+                    referencedTableSchemaName: movie
+                    referencedTableName: movie_types
+                    referencedColumnNames: id_movie_type
+                    nullable: false
+              - column:
+                  name: directors_id_director
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_directors
+                    referencedTableSchemaName: movie
+                    referencedTableName: directors
+                    referencedColumnNames: id_director
+                    nullable: false
+              - column:
+                  name: countries_id_country
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_countries
+                    referencedTableSchemaName: movie
+                    referencedTableName: countries
+                    referencedColumnNames: id_country
+                    nullable: false
+              - column:
+                  name: genres_id_genre
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_genres
+                    referencedTableSchemaName: movie
+                    referencedTableName: genres
+                    referencedColumnNames: id_genre
+                    nullable: false
+              - column:
+                  name: translators_id_translator
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_translators
+                    referencedTableSchemaName: movie
+                    referencedTableName: translators
+                    referencedColumnNames: id_translator
+                    nullable: false
+              - column:
+                  name: actors_id_actor
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_actors
+                    referencedTableSchemaName: movie
+                    referencedTableName: actors
+                    referencedColumnNames: id_actor
+              - column:
+                  name: movie_themes_id_movie_theme
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_movie_themes
+                    referencedTableSchemaName: movie
+                    referencedTableName: movie_themes
+                    referencedColumnNames: id_movie_theme
+
+
+
+

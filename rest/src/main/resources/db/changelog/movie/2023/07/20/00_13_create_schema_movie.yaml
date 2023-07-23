@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230720_001319
+      author: kerich
+      changes:
+        - sql:
+            sql:  CREATE SCHEMA movie;
