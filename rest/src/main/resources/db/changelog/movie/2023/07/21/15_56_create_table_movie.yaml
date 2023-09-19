@@ -5,10 +5,10 @@ databaseChangeLog:
       changes:
         - createTable:
             schemaName: movie
-            tableName: movie
+            tableName: movies
             columns:
               - column:
-                  name: id_movie
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -40,66 +40,66 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: movie_types_id_movie_type
+                  name: movie_types_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_movie_types
                     referencedTableSchemaName: movie
                     referencedTableName: movie_types
-                    referencedColumnNames: id_movie_type
+                    referencedColumnNames: id
                     nullable: false
               - column:
-                  name: directors_id_director
+                  name: directors_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_directors
                     referencedTableSchemaName: movie
                     referencedTableName: directors
-                    referencedColumnNames: id_director
+                    referencedColumnNames: id
                     nullable: false
               - column:
-                  name: countries_id_country
+                  name: countries_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_countries
                     referencedTableSchemaName: movie
                     referencedTableName: countries
-                    referencedColumnNames: id_country
+                    referencedColumnNames: id
                     nullable: false
               - column:
-                  name: genres_id_genre
+                  name: genres_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_genres
                     referencedTableSchemaName: movie
                     referencedTableName: genres
-                    referencedColumnNames: id_genre
+                    referencedColumnNames: id
                     nullable: false
               - column:
-                  name: translators_id_translator
+                  name: translators_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_translators
                     referencedTableSchemaName: movie
                     referencedTableName: translators
-                    referencedColumnNames: id_translator
+                    referencedColumnNames: id
                     nullable: false
               - column:
-                  name: actors_id_actor
+                  name: actors_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_actors
                     referencedTableSchemaName: movie
                     referencedTableName: actors
-                    referencedColumnNames: id_actor
+                    referencedColumnNames: id
               - column:
-                  name: movie_themes_id_movie_theme
+                  name: movie_themes_id
                   type: bigint
                   constraints:
                     foreignKeyName: movie_movie_themes
                     referencedTableSchemaName: movie
                     referencedTableName: movie_themes
-                    referencedColumnNames: id_movie_theme
+                    referencedColumnNames: id
 
 
 

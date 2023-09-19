@@ -1,5 +1,9 @@
 package com.kerich.archive.service.movie.actor;
 
-public interface ActorService {
+import com.kerich.archive.entity.movie.Actor;
 
+public interface ActorService {
+    Actor findById(Long id);
+
+    Actor saveActor(Actor actor);
 }

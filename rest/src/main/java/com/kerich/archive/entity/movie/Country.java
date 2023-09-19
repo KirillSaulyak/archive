@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_country", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Size(max = 100)

@@ -15,11 +15,11 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "movie", schema = "movie")
+@Table(name = "movies", schema = "movie")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_movie", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @NotNull
@@ -48,36 +48,36 @@ public class Movie {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "movie_types_id_movie_type", nullable = false)
-    private MovieType movieTypesIdMovieType;
+    @JoinColumn(name = "movie_types_id", nullable = false)
+    private MovieType movieTypes;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "directors_id_director", nullable = false)
-    private Director directorsIdDirector;
+    @JoinColumn(name = "directors_id", nullable = false)
+    private Director directors;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "countries_id_country", nullable = false)
-    private Country countriesIdCountry;
+    @JoinColumn(name = "countries_id", nullable = false)
+    private Country countries;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "genres_id_genre", nullable = false)
-    private Genre genresIdGenre;
+    @JoinColumn(name = "genres_id", nullable = false)
+    private Genre genres;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "translators_id_translator", nullable = false)
-    private Translator translatorsIdTranslator;
+    @JoinColumn(name = "translators_id", nullable = false)
+    private Translator translators;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "actors_id_actor")
-    private Actor actorsIdActor;
+    @JoinColumn(name = "actors_id")
+    private Actor actors;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_themes_id_movie_theme")
-    private MovieTheme movieThemesIdMovieTheme;
+    @JoinColumn(name = "movie_themes_id")
+    private MovieTheme movieThemes;
 
     @Override
     public boolean equals(Object o) {

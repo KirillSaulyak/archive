@@ -8,7 +8,7 @@ databaseChangeLog:
             tableName: countries
             columns:
               - column:
-                  name: id_country
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:

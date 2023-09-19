@@ -14,7 +14,6 @@
     <option name="isLombokBuilder" value="true" />
     <option name="isLombokAllArgsConstructor" value="true" />
     <option name="isLombokNoArgsConstructor" value="true" />
-    <option name="useLazyOnToOneAssociations" value="true" />
     <option name="scaffoldingLanguage" />
   </component>
 </project>

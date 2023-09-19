@@ -8,7 +8,7 @@ databaseChangeLog:
             tableName: movie_types
             columns:
               - column:
-                  name: id_movie_type
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:

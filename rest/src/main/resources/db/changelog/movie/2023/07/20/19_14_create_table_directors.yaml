@@ -8,7 +8,7 @@ databaseChangeLog:
             tableName: directors
             columns:
               - column:
-                  name: id_director
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
