@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -23,8 +24,8 @@ public class Movie {
     private Long id;
 
     @NotNull
-    @Column(name = "movie_release", nullable = false)
-    private LocalDate movieRelease;
+    @Column(name = "release", nullable = false)
+    private LocalDate release;
 
     @Size(max = 10)
     @NotNull
@@ -38,46 +39,79 @@ public class Movie {
 
     @Size(max = 45)
     @NotNull
-    @Column(name = "name", nullable = false, length = 45)
+    @Column(name = "name", nullable = false, length = 200)
     private String name;
 
     @Size(max = 45)
     @NotNull
-    @Column(name = "name_another", nullable = false, length = 45)
+    @Column(name = "name_another", nullable = false, length = 200)
     private String nameAnother;
 
+    @Size(max = 45)
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "movie_types_id", nullable = false)
-    private MovieType movieTypes;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "directors_id", nullable = false)
-    private Director directors;
+    @Column(name = "path_to_poster", nullable = false, length = 255)
+    private String pathToPoster;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "countries_id", nullable = false)
-    private Country countries;
+    @ManyToMany
+    @JoinTable(
+            schema = "movie",
+            name = "movies_actors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private List<Actor> actors;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "genres_id", nullable = false)
-    private Genre genres;
+    @ManyToMany
+    @JoinTable(
+            schema = "movie",
+            name = "movies_countries",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id")
+    )
+    private List<Country> countries;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "translators_id", nullable = false)
-    private Translator translators;
+    @ManyToMany
+    @JoinTable(
+            schema = "movie",
+            name = "movies_directors",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "director_id")
+    )
+    private List<Director> directors;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "actors_id")
-    private Actor actors;
+    @NotNull
+    @ManyToMany
+    @JoinTable(
+            schema = "movie",
+            name = "movies_genres",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_themes_id")
-    private MovieTheme movieThemes;
+    @NotNull
+    @ManyToMany
+    @JoinTable(
+            schema = "movie",
+            name = "movies_themes",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "theme_id")
+    )
+    private List<Theme> themes;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "translator_id", nullable = false)
+    private Translator translator;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "type_id", nullable = false)
+    private Type type;
+
 
     @Override
     public boolean equals(Object o) {

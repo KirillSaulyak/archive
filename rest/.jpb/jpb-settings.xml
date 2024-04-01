@@ -8,7 +8,7 @@
       </database-info>
     </database-infos>
   </component>
-  <component name="JpaPluginProjectSettings">
+  <component name="JpaPluginProjectSettings" dtoSerializableType="2">
     <option name="entityNameTemplate" />
     <option name="isLombokGetterAndSetter" value="true" />
     <option name="isLombokBuilder" value="true" />

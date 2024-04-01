@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230721_165200
+      author: kerich
+      changes:
+        - createTable:
+            schemaName: movie
+            tableName: movies_themes
+            columns:
+              - column:
+                  name: movie_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: movies_themes_movies
+                    referencedTableSchemaName: movie
+                    referencedTableName: movies
+                    referencedColumnNames: id
+              - column:
+                  name: theme_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: movies_themes_themes
+                    referencedTableSchemaName: movie
+                    referencedTableName: themes
+                    referencedColumnNames: id

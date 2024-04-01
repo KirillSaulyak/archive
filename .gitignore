@@ -24,19 +24,19 @@ hs_err_pid*
 replay_pid*
 
 # dependencies
-/node_modules
-/.pnp
+front/node_modules
+front/.pnp
 .pnp.js
 
 # testing
-/coverage
+front/coverage
 
 # next.js
-/.next/
-/out/
+front/.next/
+front/out/
 
 # production
-/build
+front/build
 
 # misc
 .DS_Store
@@ -56,3 +56,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#secretFiles
+links.js

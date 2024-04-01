@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230721_164500
+      author: kerich
+      changes:
+        - createTable:
+            schemaName: movie
+            tableName: movies_actors
+            columns:
+              - column:
+                  name: movie_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: movies_actors_movies
+                    referencedTableSchemaName: movie
+                    referencedTableName: movies
+                    referencedColumnNames: id
+              - column:
+                  name: actor_id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: movies_actors_actors
+                    referencedTableSchemaName: movie
+                    referencedTableName: actors
+                    referencedColumnNames: id

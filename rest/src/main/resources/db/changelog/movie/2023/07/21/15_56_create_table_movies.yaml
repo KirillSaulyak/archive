@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20230721_155600
+      author: kerich
+      changes:
+        - createTable:
+            schemaName: movie
+            tableName: movies
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: release
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name_another
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: path_to_poster
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_types
+                    referencedTableSchemaName: movie
+                    referencedTableName: types
+                    referencedColumnNames: id
+                    nullable: false
+              - column:
+                  name: translator_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: movie_translators
+                    referencedTableSchemaName: movie
+                    referencedTableName: translators
+                    referencedColumnNames: id
+                    nullable: false
+
+
+
