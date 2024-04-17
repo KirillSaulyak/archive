@@ -1,14 +1,13 @@
 'use client'
 
-import { DatePicker as DatePickerMUI } from "@mui/x-date-pickers-pro";
-import { LocalizationProvider } from '@mui/x-date-pickers-pro'
+import { DatePicker as DatePickerMUI, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import ruLocale from 'date-fns/locale/ru';
 import { format } from 'date-fns';
 
 
-export default function DatePicker({ label, onChange, value }) {
+export default function DatePicker({ label, onChange, oldValue }) {
     return (
         <LocalizationProvider
             dateAdapter={AdapterDateFns}
@@ -16,7 +15,7 @@ export default function DatePicker({ label, onChange, value }) {
         >
             <DatePickerMUI
                 label={label}
-                value={new Date(value)}
+                value={new Date(oldValue)}
                 views={['year', 'month', 'day']}
                 dateFormat="yyyy-MM-dd"
                 sx={{ width: 250 }}

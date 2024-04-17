@@ -19,6 +19,11 @@ export default function Autocomplete({ valueIds, options, optionLabel, label, mu
         }
     }, [options, valueIds]);
 
+    const onChangeHandler = (value) => {
+        setSelectedValues(value)
+        multiple ? onChange(value.map(item => item.id)) : onChange(value.id)
+    };
+
     return (
         <AutocompleteMUI
             disablePortal
@@ -29,7 +34,7 @@ export default function Autocomplete({ valueIds, options, optionLabel, label, mu
             multiple={multiple}
             onChange={
                 (event, value) => {
-                    multiple ? onChange(value.map(item => item.id)) : onChange(value.id)
+                    onChangeHandler(value)
                 }
             }
             renderInput={

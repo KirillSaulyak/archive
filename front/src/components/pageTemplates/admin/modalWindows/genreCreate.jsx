@@ -1,7 +1,7 @@
-import Dialog from '../../../MUI/dialogs/Dialog';
+import Dialog from '@/MUI/dialogs/Dialog';
 import { useState } from '../commonImports';
-import { usePostGenreMutation } from '../../../store/api/admin/movie/genre';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
+import { usePostGenreMutation } from '@/store/api/admin/movie/genre';
+import useHandleInputChange from '@/hooks/useHandleInputChange';
 
 export default function GenreCreate() {//props:dialogProps) {
     const [postGenre] = usePostGenreMutation();

@@ -1,7 +1,7 @@
-import Dialog from '../../../MUI/dialogs/Dialog';
+import Dialog from '@/MUI/dialogs/Dialog';
 import { useState } from '../commonImports';
-import { usePostDirectorMutation } from '../../../store/api/admin/movie/director';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
+import { usePostDirectorMutation } from '@/store/api/admin/movie/director';
+import useHandleInputChange from '@/hooks/useHandleInputChange';
 
 export default function DirectorCreate() {//props:dialogProps) {
     const [postDirector] = usePostDirectorMutation();

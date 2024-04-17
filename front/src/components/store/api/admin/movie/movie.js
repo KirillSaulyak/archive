@@ -10,7 +10,7 @@ export const movieApi = createApi({
         query: (id) => `/movies/${id}`,
       }),
       postMovie: builder.mutation({
-        query: (movie) => ({
+        query: (movie) => ({   
           url: '/movies',
           method: 'POST',
           body: movie

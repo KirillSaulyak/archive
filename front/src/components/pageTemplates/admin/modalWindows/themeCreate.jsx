@@ -1,7 +1,7 @@
-import Dialog from '../../../MUI/dialogs/Dialog';
+import Dialog from '@/MUI/dialogs/Dialog';
 import { useState } from '../commonImports';
-import { usePostThemeMutation } from '../../../store/api/admin/movie/theme';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
+import { usePostThemeMutation } from '@/store/api/admin/movie/theme';
+import useHandleInputChange from '@/hooks/useHandleInputChange';
 
 export default function ThemeCreate() {//props:dialogProps) {
     const [postTheme] = usePostThemeMutation();

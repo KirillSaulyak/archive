@@ -2,7 +2,7 @@ interface common {
     name: string,
     label: string,
     variableName: string,
-    value: string,
+    oldValue: string,
     onChange: (value: string) => void
 }
 

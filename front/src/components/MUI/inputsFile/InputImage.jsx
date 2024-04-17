@@ -3,12 +3,13 @@ import UploadIcon from '@mui/icons-material/Upload';
 
 import { useState, createRef } from "react";
 
-import { Grid } from '../../MUI/grids/importsCommon';
+import { Grid } from '../grids/importsCommon';
 import Image from 'next/image';
 
-export default function InputImage() {
-    const inputFileRef = createRef<HTMLInputElement>();
+export default function InputImage({ onChange }) {
 
+    // const inputFileRef = createRef < HTMLInputElement > ();
+    const inputFileRef = createRef();
     const handleButtonClick = () => {
         inputFileRef.current?.click();
 
@@ -16,11 +17,16 @@ export default function InputImage() {
 
     const [imgURL, setImgURL] = useState("/poster.jpeg");
 
-    const changePreview = () => {
-        const file = inputFileRef.current?.files?.[0];
-        if (file) {
-            setImgURL(URL.createObjectURL(file))
+    const changePreview = (poster) => {
+        if (poster) {
+            setImgURL(URL.createObjectURL(poster))
         }
+    };
+
+    const onChangeHandler = () => {
+        const poster = inputFileRef.current?.files?.[0];
+        changePreview(poster);
+        onChange(poster);
     };
 
     return (
@@ -43,7 +49,7 @@ export default function InputImage() {
                     type="file"
                     accept="image/*"
                     ref={inputFileRef}
-                    onChange={() => changePreview()}
+                    onChange={onChangeHandler}
                     hidden
                 />
             </Grid>

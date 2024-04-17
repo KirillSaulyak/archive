@@ -5,7 +5,9 @@ import com.kerich.archive.dto.movie.admin.movie.MovieSaveDto;
 import com.kerich.archive.dto.movie.admin.movie.MovieUpdateDto;
 import com.kerich.archive.service.movie.admin.movie.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,9 +20,11 @@ public class MovieController {
         return movieService.getMovieInfoDtoById(id);
     }
 
-    @PostMapping
-    public void saveMovie(@RequestBody MovieSaveDto movieSaveDto) {
-        movieService.saveMovie(movieSaveDto);
+    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public void saveMovie(@RequestPart(name = "files", required = false) MultipartFile poster, @RequestPart(name = "json", required = false) MovieSaveDto movieSaveDto) {
+        System.out.println("sdf");
+
+        //movieService.saveMovie(movieSaveDto);
     }
 
     @PutMapping

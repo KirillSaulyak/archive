@@ -1,7 +1,7 @@
-import Dialog from '../../../MUI/dialogs/Dialog';
+import Dialog from '@/MUI/dialogs/Dialog';
 import { useState } from '../commonImports';
-import { usePostActorMutation } from '../../../store/api/admin/movie/actor';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
+import { usePostActorMutation } from '@/store/api/admin/movie/actor';
+import useHandleInputChange from '@/hooks/useHandleInputChange';
 
 export default function ActorCreate() {//props:dialogProps) {
     const [postActor] = usePostActorMutation();

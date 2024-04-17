@@ -2,6 +2,7 @@ package com.kerich.archive.dto.movie.admin.movie;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;

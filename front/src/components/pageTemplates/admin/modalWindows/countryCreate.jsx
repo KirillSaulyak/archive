@@ -1,7 +1,7 @@
-import Dialog from '../../../MUI/dialogs/Dialog';
+import Dialog from '@/MUI/dialogs/Dialog';
 import { useState } from '../commonImports';
-import { usePostCountryMutation } from '../../../store/api/admin/movie/country';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
+import { usePostCountryMutation } from '@/store/api/admin/movie/country';
+import useHandleInputChange from '@/hooks/useHandleInputChange';
 
 export default function CountryCreate() {//props:dialogProps) {
     const [postCountry] = usePostCountryMutation();

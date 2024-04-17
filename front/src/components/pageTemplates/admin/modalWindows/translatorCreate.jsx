@@ -1,7 +1,7 @@
-import Dialog from '../../../MUI/dialogs/Dialog';
+import Dialog from '@/MUI/dialogs/Dialog';
 import { useState } from '../commonImports';
-import { usePostTranslatorMutation } from '../../../store/api/admin/movie/translator';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
+import { usePostTranslatorMutation } from '@/store/api/admin/movie/translator';
+import useHandleInputChange from '@/hooks/useHandleInputChange';
 
 export default function TranslatorCreate() {//props:dialogProps) {
     const [postTranslator] = usePostTranslatorMutation();

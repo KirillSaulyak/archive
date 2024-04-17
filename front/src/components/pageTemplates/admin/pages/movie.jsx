@@ -1,12 +1,11 @@
-import Column from '../../../MUI/grids/column/Column';
-import RowCenter from '../../../MUI/grids/row/center/RowCenter';
-import SubRowCenter from '../../../MUI/grids/row/center/SubRowCenter';
-import DatePicker from '../../../MUI/dataPickers/DataPicker';
-import TextField from '../../../MUI/textFields/TextField';
-import InputImage from '../../../MUI/inputsFile/InputImage';
-import Autocomplete from '../../../MUI/autocompletes/Autocomplete';
-import TextArea from '../../../MUI/textFields/TextArea';
-import SaveButton from '../../../MUI/buttons/SaveButton';
+import Column from '@/MUI/grids/column/Column';
+import RowCenter from '@/MUI/grids/row/center/RowCenter';
+import SubRowCenter from '@/MUI/grids/row/center/SubRowCenter';
+import DatePicker from '@/MUI/dataPickers/DataPicker';
+import TextField from '@/MUI/textFields/TextField';
+import InputImage from '@/MUI/inputsFile/InputImage';
+import Autocomplete from '@/MUI/autocompletes/Autocomplete';
+import TextArea from '@/MUI/textFields/TextArea';
 
 import ActorCreate from '../modalWindows/actorCreate';
 import CountryCreate from '../modalWindows/countryCreate';
@@ -16,18 +15,18 @@ import ThemeCreate from '../modalWindows/themeCreate';
 import TranslatorCreate from '../modalWindows/translatorCreate';
 import TypeCreate from '../modalWindows/typeCreate';
 
-import { useGetActorsQuery } from '../../../store/api/admin/movie/actor';
-import { useGetCountriesQuery } from '../../../store/api/admin/movie/country';
-import { useGetDirectorsQuery } from '../../../store/api/admin/movie/director';
-import { useGetGenresQuery } from '../../../store/api/admin/movie/genre';
-import { useGetThemesQuery } from '../../../store/api/admin/movie/theme';
-import { useGetTranslatorsQuery } from '../../../store/api/admin/movie/translator';
-import { useGetTypesQuery } from '../../../store/api/admin/movie/type';
+import { useGetActorsQuery } from '@/store/api/admin/movie/actor';
+import { useGetCountriesQuery } from '@/store/api/admin/movie/country';
+import { useGetDirectorsQuery } from '@/store/api/admin/movie/director';
+import { useGetGenresQuery } from '@/store/api/admin/movie/genre';
+import { useGetThemesQuery } from '@/store/api/admin/movie/theme';
+import { useGetTranslatorsQuery } from '@/store/api/admin/movie/translator';
+import { useGetTypesQuery } from '@/store/api/admin/movie/type';
 
 import { useState, useEffect } from '../commonImports';
-import useHandleInputChange from '../../../hooks/useHandleInputChange';
 
-function Movie({ oldMovie, saveMovie }) {
+
+function Movie({ handleInputChange, oldMovieForm }) {
     const { data: actors = [] } = useGetActorsQuery();
     const { data: countries = [] } = useGetCountriesQuery();
     const { data: directors = [] } = useGetDirectorsQuery();
@@ -37,7 +36,6 @@ function Movie({ oldMovie, saveMovie }) {
     const { data: types = [] } = useGetTypesQuery();
 
     const [movieForm, setMovieForm] = useState({
-        id: null,
         name: '',
         nameAnother: '',
         duration: '',
@@ -52,28 +50,25 @@ function Movie({ oldMovie, saveMovie }) {
         description: '',
     });
 
-    const { handleInputChange } = useHandleInputChange(movieForm, setMovieForm);
-
     useEffect(() => {
-        if (oldMovie !== undefined) {
+        if (oldMovieForm !== undefined) {
             setMovieForm({
                 ...movieForm,
-                id: oldMovie.id,
-                name: oldMovie.name,
-                nameAnother: oldMovie.nameAnother,
-                duration: oldMovie.duration,
-                release: oldMovie.release,
-                typeId: oldMovie.typeId,
-                countryIds: oldMovie.countryIds,
-                genreIds: oldMovie.genreIds,
-                translatorId: oldMovie.translatorId,
-                themeIds: oldMovie.themeIds,
-                actorIds: oldMovie.actorIds,
-                directorIds: oldMovie.directorIds,
-                description: oldMovie.description,
+                name: oldMovieForm.name,
+                nameAnother: oldMovieForm.nameAnother,
+                duration: oldMovieForm.duration,
+                release: oldMovieForm.release,
+                typeId: oldMovieForm.typeId,
+                countryIds: oldMovieForm.countryIds,
+                genreIds: oldMovieForm.genreIds,
+                translatorId: oldMovieForm.translatorId,
+                themeIds: oldMovieForm.themeIds,
+                actorIds: oldMovieForm.actorIds,
+                directorIds: oldMovieForm.directorIds,
+                description: oldMovieForm.description,
             })
         }
-    }, [oldMovie]);
+    }, [oldMovieForm]);
 
     return (
         <>
@@ -81,14 +76,14 @@ function Movie({ oldMovie, saveMovie }) {
                 <Column>
                     <TextField
                         label='Название'
-                        value={movieForm.name}
+                        oldValue={movieForm.name}
                         onChange={handleInputChange('name')}
                     />
                 </Column>
                 <Column>
                     <TextField
                         label='Иностранное название'
-                        value={movieForm.nameAnother}
+                        oldValue={movieForm.nameAnother}
                         onChange={handleInputChange('nameAnother')}
                     />
                 </Column>
@@ -96,7 +91,7 @@ function Movie({ oldMovie, saveMovie }) {
                     <TextField
                         label='Продолжительность'
                         isNumber={true}
-                        value={movieForm.duration}
+                        oldValue={movieForm.duration}
                         onChange={handleInputChange('duration')}
                     />
                 </Column>
@@ -106,7 +101,7 @@ function Movie({ oldMovie, saveMovie }) {
                 <Column>
                     <DatePicker
                         label='Дата выхода'
-                        value={movieForm.release}
+                        oldValue={movieForm.release}
                         onChange={handleInputChange('release')}
                     />
                 </Column>
@@ -224,7 +219,7 @@ function Movie({ oldMovie, saveMovie }) {
 
             <RowCenter>
                 <Column>
-                    <InputImage />
+                    <InputImage onChange={handleInputChange('poster')} />
                 </Column>
             </RowCenter>
 
@@ -232,15 +227,9 @@ function Movie({ oldMovie, saveMovie }) {
                 <Column>
                     <TextArea
                         label='Описание'
-                        value={movieForm.description}
+                        oldValue={movieForm.description}
                         onChange={handleInputChange('description')}
                     />
-                </Column>
-            </RowCenter>
-
-            <RowCenter>
-                <Column>
-                    <SaveButton onClick={() => saveMovie(movieForm)} />
                 </Column>
             </RowCenter>
         </>
