@@ -1,12 +1,12 @@
 'use client'
 
-import Title from '@/MUI/titels/Title';
-import BackButton from "@/MUI/buttons/BackButton";
-import RowCenter from '@/MUI/grids/row/center/RowCenter';
-import Column from '@/MUI/grids/column/Column';
-import SaveButton from '@/MUI/buttons/SaveButton';
+import Title from '@/components/MUI/admin/titels/Title';
+import BackButton from "@/components/MUI/admin/buttons/BackButton";
+import RowCenter from '@/components/MUI/admin/grid/rows/center/RowCenter';
+import Column from '@/components/MUI/admin/grid/columns/Column';
+import SaveButton from '@/components/MUI/admin/buttons/SaveButton';
 
-import Movie from '@/pageTemplates/admin/pages/movie';
+import Movie from '@/components/pageTemplates/pages/movie';
 
 import { useGetMovieByIdQuery, usePutMovieMutation } from '@/store/api/admin/movie/movie';
 

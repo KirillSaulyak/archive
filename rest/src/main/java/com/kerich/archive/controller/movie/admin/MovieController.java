@@ -20,8 +20,8 @@ public class MovieController {
         return movieService.getMovieInfoDtoById(id);
     }
 
-    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public void saveMovie(@RequestPart(name = "files", required = false) MultipartFile poster, @RequestPart(name = "json", required = false) MovieSaveDto movieSaveDto) {
+    @PostMapping
+    public void saveMovie(@RequestPart MultipartFile poster, @RequestPart("json") MovieSaveDto movieSaveDto) {
         System.out.println("sdf");
 
         //movieService.saveMovie(movieSaveDto);

@@ -5,9 +5,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux';
 
-import store from '../components/store';
-import NavBar from "../components/MUI/navBars/navBar";
-import Container from '../components/MUI/containers/container';
+import store from '../store';
+import NavBar from "../components/MUI/admin/navBars/NavBar/NavBar";
+import Container from '../components/MUI/admin/containers/Container/Container';
 
 const inter = Inter({ subsets: ['latin'] })
 

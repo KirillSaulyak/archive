@@ -1,17 +1,17 @@
 'use client'
 
-import Movie from '@/pageTemplates/admin/pages/movie';
+import Movie from '@/pageTemplates/pages/movie';
 
-import Title from '@/MUI/titels/Title';
-import BackButton from "@/MUI/buttons/BackButton";
-import RowCenter from '@/MUI/grids/row/center/RowCenter';
-import Column from '@/MUI/grids/column/Column';
-import SaveButton from '@/MUI/buttons/SaveButton';
+import BackButton from "@/MUI/admin/buttons/BackButton";
+import SaveButton from '@/MUI/admin/buttons/SaveButton';
+import Column from '@/MUI/admin/grid/columns/Column/Column';
+import RowCenter from '@/MUI/admin/grid/rows/center/RowCenter';
+import Title from '@/MUI/admin/titels/Title/Title';
 
 import { usePostMovieMutation } from '@/store/api/admin/movie/movie';
 
-import useHandleInputChange from '@/hooks/useHandleInputChange';
-import useConvertFormToFormData from '@/hooks/useConvertFormToFormData';
+import useConvertFormToFormData from '../../hooks/useConvertFormToFormData';
+import useHandleInputChange from '../../hooks/useHandleInputChange';
 
 import { useState } from 'react';
 
@@ -48,8 +48,6 @@ function Create() {
             <RowCenter>
                 <Column>
                     <SaveButton onClick={() => saveMovie()} />
-
-                    {/* saveMovie(postMovie)} /> */}
                 </Column>
             </RowCenter>
         </>

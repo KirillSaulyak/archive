@@ -20,9 +20,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/components/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/admin/autocompletes/Autocomplete.tsx", "components/admin/inputsFile/InputImage.jsx", "components/pages/test/Test.tsx", "components/pages/mainPage/MainPage.Jsx", "components/admin/buttons/SaveButton.jsx", "components/admin/buttons/SaveButton.jsx", "components/pages/movie/MoviePage.jsx", "components/admin/textFields/TextField.jsx", "src/app/page.jsx", "src/app/movies/page.jsx", "src/components/MUI/autocompletes/Autocomplete.jsx", "src/components/MUI/dataPickers/DataPicker.jsx", "src/components/MUI/grids/row/center/SubRowCenter.tsx", "src/components/MUI/inputsFile/InputImage.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/admin/autocompletes/Autocomplete.tsx", "components/admin/inputsFile/InputImage.jsx", "components/pages/test/Test.tsx", "components/pages/mainPage/MainPage.Jsx", "components/admin/buttons/SaveButton.jsx", "components/admin/buttons/SaveButton.jsx", "components/pages/movie/MoviePage.jsx", "components/admin/textFields/TextField.jsx", "src/app/page.jsx", "src/app/movies/page.jsx", "src/components/MUI/autocompletes/AutocompleteSingle.jsx", "src/components/MUI/datePickers/DataPicker.jsxaPicker.jsx", "src/components/MUI/grids/row/center/SubRowCenter.tsx", "src/components/MUI/admin/inputsFile/InputImage.jsx"],
   "exclude": ["node_modules"]
 }
