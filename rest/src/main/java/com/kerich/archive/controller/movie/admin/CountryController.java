@@ -1,7 +1,7 @@
 package com.kerich.archive.controller.movie.admin;
 
+import com.kerich.archive.dto.movie.admin.country.CountryCreateDto;
 import com.kerich.archive.dto.movie.admin.country.CountryInfoShortDto;
-import com.kerich.archive.dto.movie.admin.country.CountrySaveDto;
 import com.kerich.archive.service.movie.admin.country.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class CountryController {
     }
 
     @PostMapping
-    public void saveCountry(@RequestBody CountrySaveDto countrySaveDto) {
-        countryService.saveCountry(countrySaveDto);
+    public void createCountry(@RequestBody CountryCreateDto countryCreateDto) {
+        countryService.createCountry(countryCreateDto);
     }
 }

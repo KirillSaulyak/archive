@@ -1,9 +1,9 @@
 package com.kerich.archive.service.movie.admin.translator;
 
-import com.kerich.archive.dto.movie.admin.translator.TranslatorSaveDto;
+import com.kerich.archive.dto.movie.admin.translator.TranslatorCreateDto;
 import com.kerich.archive.dto.movie.admin.translator.TranslatorInfoShortDto;
 import com.kerich.archive.entity.movie.Translator;
-import com.kerich.archive.mapper.movie.admin.translator.TranslatorSaveMapper;
+import com.kerich.archive.mapper.movie.admin.translator.TranslatorCreateMapper;
 import com.kerich.archive.mapper.movie.admin.translator.TranslatorInfoShortMapper;
 import com.kerich.archive.repository.movie.TranslatorRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 public class TranslatorServiceImpl implements TranslatorService {
     private final TranslatorRepository translatorRepository;
     private final TranslatorInfoShortMapper translatorInfoShortMapper;
-    private final TranslatorSaveMapper translatorSaveMapper;
+    private final TranslatorCreateMapper translatorCreateMapper;
 
     @Override
-    public void saveTranslator(TranslatorSaveDto translatorSaveDto) {
-        translatorRepository.save(translatorSaveMapper.toEntity(translatorSaveDto));
+    public void createTranslator(TranslatorCreateDto translatorCreateDto) {
+        translatorRepository.save(translatorCreateMapper.toEntity(translatorCreateDto));
     }
 
     @Override

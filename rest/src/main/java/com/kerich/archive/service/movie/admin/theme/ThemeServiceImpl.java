@@ -1,9 +1,9 @@
 package com.kerich.archive.service.movie.admin.theme;
 
-import com.kerich.archive.dto.movie.admin.theme.ThemeSaveDto;
+import com.kerich.archive.dto.movie.admin.theme.ThemeCreateDto;
 import com.kerich.archive.dto.movie.admin.theme.ThemeInfoShortDto;
 import com.kerich.archive.entity.movie.Theme;
-import com.kerich.archive.mapper.movie.admin.theme.ThemeSaveMapper;
+import com.kerich.archive.mapper.movie.admin.theme.ThemeCreateMapper;
 import com.kerich.archive.mapper.movie.admin.theme.ThemeInfoShortMapper;
 import com.kerich.archive.repository.movie.ThemeRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 public class ThemeServiceImpl implements ThemeService {
     private final ThemeRepository themeRepository;
     private final ThemeInfoShortMapper themeInfoShortMapper;
-    private final ThemeSaveMapper themeSaveMapper;
+    private final ThemeCreateMapper themeCreateMapper;
 
     @Override
-    public void saveTheme(ThemeSaveDto themeSaveDto) {
-        themeRepository.save(themeSaveMapper.toEntity(themeSaveDto));
+    public void createTheme(ThemeCreateDto themeCreateDto) {
+        themeRepository.save(themeCreateMapper.toEntity(themeCreateDto));
     }
 
     @Override

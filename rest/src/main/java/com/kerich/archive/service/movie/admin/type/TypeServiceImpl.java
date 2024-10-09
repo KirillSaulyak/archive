@@ -1,9 +1,9 @@
 package com.kerich.archive.service.movie.admin.type;
 
-import com.kerich.archive.dto.movie.admin.type.TypeSaveDto;
+import com.kerich.archive.dto.movie.admin.type.TypeCreateDto;
 import com.kerich.archive.dto.movie.admin.type.TypeInfoShortDto;
 import com.kerich.archive.entity.movie.Type;
-import com.kerich.archive.mapper.movie.admin.type.TypeSaveMapper;
+import com.kerich.archive.mapper.movie.admin.type.TypeCreateMapper;
 import com.kerich.archive.mapper.movie.admin.type.TypeInfoShortMapper;
 import com.kerich.archive.repository.movie.TypeRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 public class TypeServiceImpl implements TypeService {
     private final TypeRepository typeRepository;
     private final TypeInfoShortMapper typeInfoShortMapper;
-    private final TypeSaveMapper typeSaveMapper;
+    private final TypeCreateMapper typeCreateMapper;
 
     @Override
-    public void saveType(TypeSaveDto typeSaveDto) {
-        typeRepository.save(typeSaveMapper.toEntity(typeSaveDto));
+    public void createType(TypeCreateDto typeCreateDto) {
+        typeRepository.save(typeCreateMapper.toEntity(typeCreateDto));
     }
 
     @Override

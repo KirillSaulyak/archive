@@ -1,6 +1,6 @@
 package com.kerich.archive.controller.movie.admin;
 
-import com.kerich.archive.dto.movie.admin.translator.TranslatorSaveDto;
+import com.kerich.archive.dto.movie.admin.translator.TranslatorCreateDto;
 import com.kerich.archive.dto.movie.admin.translator.TranslatorInfoShortDto;
 import com.kerich.archive.service.movie.admin.translator.TranslatorService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class TranslatorController {
     }
 
     @PostMapping
-    public void saveTranslator(@RequestBody TranslatorSaveDto translatorSaveDto) {
-        translatorService.saveTranslator(translatorSaveDto);
+    public void createTranslator(@RequestBody TranslatorCreateDto translatorCreateDto) {
+        translatorService.createTranslator(translatorCreateDto);
     }
 }

@@ -1,9 +1,9 @@
 package com.kerich.archive.service.movie.admin.country;
 
-import com.kerich.archive.dto.movie.admin.country.CountrySaveDto;
+import com.kerich.archive.dto.movie.admin.country.CountryCreateDto;
 import com.kerich.archive.dto.movie.admin.country.CountryInfoShortDto;
 import com.kerich.archive.entity.movie.Country;
-import com.kerich.archive.mapper.movie.admin.country.CountrySaveMapper;
+import com.kerich.archive.mapper.movie.admin.country.CountryCreateMapper;
 import com.kerich.archive.mapper.movie.admin.country.CountryInfoShortMapper;
 import com.kerich.archive.repository.movie.CountryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +18,11 @@ public class CountryServiceImpl implements CountryService {
     private final CountryRepository countryRepository;
     private final CountryInfoShortMapper countryInfoShortMapper;
 
-    private final CountrySaveMapper countrySaveMapper;
+    private final CountryCreateMapper countryCreateMapper;
 
     @Override
-    public void saveCountry(CountrySaveDto countrySaveDto) {
-        countryRepository.save(countrySaveMapper.toEntity(countrySaveDto));
+    public void createCountry(CountryCreateDto countryCreateDto) {
+        countryRepository.save(countryCreateMapper.toEntity(countryCreateDto));
     }
 
     @Override

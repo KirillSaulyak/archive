@@ -1,10 +1,10 @@
 package com.kerich.archive.service.movie.admin.actor;
 
+import com.kerich.archive.dto.movie.admin.actor.ActorCreateDto;
 import com.kerich.archive.dto.movie.admin.actor.ActorInfoShortDto;
-import com.kerich.archive.dto.movie.admin.actor.ActorSaveDto;
 import com.kerich.archive.entity.movie.Actor;
 import com.kerich.archive.mapper.movie.admin.actor.ActorInfoShortMapper;
-import com.kerich.archive.mapper.movie.admin.actor.ActorSaveMapper;
+import com.kerich.archive.mapper.movie.admin.actor.ActorCreateMapper;
 import com.kerich.archive.repository.movie.ActorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class ActorServiceImpl implements ActorService {
     private final ActorRepository actorRepository;
     private final ActorInfoShortMapper actorInfoShortMapper;
-    private final ActorSaveMapper actorSaveMapper;
+    private final ActorCreateMapper actorCreateMapper;
 
     @Override
     public List<ActorInfoShortDto> findAllActorInfoShortDtos() {
@@ -25,8 +25,8 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public void saveActor(ActorSaveDto actorSaveDto) {
-        actorRepository.save(actorSaveMapper.toEntity(actorSaveDto));
+    public void createActor(ActorCreateDto actorCreateDto) {
+        actorRepository.save(actorCreateMapper.toEntity(actorCreateDto));
     }
 
     @Override

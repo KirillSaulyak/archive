@@ -1,6 +1,6 @@
 package com.kerich.archive.controller.movie.admin;
 
-import com.kerich.archive.dto.movie.admin.theme.ThemeSaveDto;
+import com.kerich.archive.dto.movie.admin.theme.ThemeCreateDto;
 import com.kerich.archive.dto.movie.admin.theme.ThemeInfoShortDto;
 import com.kerich.archive.service.movie.admin.theme.ThemeService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class ThemeController {
     }
 
     @PostMapping
-    public void saveTheme(@RequestBody ThemeSaveDto themeSaveDto) {
-        themeService.saveTheme(themeSaveDto);
+    public void createTheme(@RequestBody ThemeCreateDto themeCreateDto) {
+        themeService.createTheme(themeCreateDto);
     }
 }

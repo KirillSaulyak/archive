@@ -1,9 +1,9 @@
 package com.kerich.archive.service.movie.admin.genre;
 
-import com.kerich.archive.dto.movie.admin.genre.GenreSaveDto;
+import com.kerich.archive.dto.movie.admin.genre.GenreCreateDto;
 import com.kerich.archive.dto.movie.admin.genre.GenreInfoShortDto;
 import com.kerich.archive.entity.movie.Genre;
-import com.kerich.archive.mapper.movie.admin.genre.GenreSaveMapper;
+import com.kerich.archive.mapper.movie.admin.genre.GenreCreateMapper;
 import com.kerich.archive.mapper.movie.admin.genre.GenreInfoShortMapper;
 import com.kerich.archive.repository.movie.GenreRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
     private final GenreInfoShortMapper genreInfoShortMapper;
-    private final GenreSaveMapper genreSaveMapper;
+    private final GenreCreateMapper genreCreateMapper;
 
     @Override
-    public void saveGenre(GenreSaveDto genreSaveDto) {
-        genreRepository.save(genreSaveMapper.toEntity(genreSaveDto));
+    public void createGenre(GenreCreateDto genreCreateDto) {
+        genreRepository.save(genreCreateMapper.toEntity(genreCreateDto));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.kerich.archive.controller.movie.admin;
 
 import com.kerich.archive.dto.movie.admin.actor.ActorInfoShortDto;
-import com.kerich.archive.dto.movie.admin.actor.ActorSaveDto;
+import com.kerich.archive.dto.movie.admin.actor.ActorCreateDto;
 import com.kerich.archive.service.movie.admin.actor.ActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class ActorController {
     }
 
     @PostMapping
-    public void saveActor(@RequestBody ActorSaveDto actorSaveDto) {
-        actorService.saveActor(actorSaveDto);
+    public void createActor(@RequestBody ActorCreateDto actorCreateDto) {
+        actorService.createActor(actorCreateDto);
     }
 }

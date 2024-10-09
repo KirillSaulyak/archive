@@ -6,8 +6,8 @@ import { Inter } from 'next/font/google'
 import { Provider } from 'react-redux';
 
 import store from '../store';
-import NavBar from "../components/MUI/admin/navBars/NavBar/NavBar";
-import Container from '../components/MUI/admin/containers/Container/Container';
+import NavBar from "@/components/MUI/movie/admin/navBars/NavBar/NavBar";
+import Container from '@/components/MUI/movie/admin/containers/Container/Container';
 
 const inter = Inter({ subsets: ['latin'] })
 
