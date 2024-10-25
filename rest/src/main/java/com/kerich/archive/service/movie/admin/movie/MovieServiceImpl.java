@@ -11,6 +11,7 @@ import com.kerich.archive.repository.movie.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.NoSuchElementException;
 
@@ -29,7 +30,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @Transactional
-    public void createMovie(MovieCreateDto movieCreateDto) {
+    public void createMovie(MovieCreateDto movieCreateDto, MultipartFile Poster) {
         Movie movie = movieCreateMapper.toEntity(movieCreateDto);
         movie.setPathToPoster("TEMP NOTHING");
         movieRepository.save(movie);

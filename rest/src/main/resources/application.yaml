@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 1024
+
+spring:
+  main:
+    banner-mode: "console"
+  application:
+    name: Archive
+  profiles:
+    active: local
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+    enabled: true
+  cache:
+    type: redis
+    cache-names: movie, authors # имена кэша сюда
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, loggers
+  endpoint:
+    health:
+      show-details: always
+#добавить защиту на редис и актуатор и логгер

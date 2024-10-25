@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ActorServiceImpl implements ActorService {
+
     private final ActorRepository actorRepository;
     private final ActorInfoShortMapper actorInfoShortMapper;
     private final ActorCreateMapper actorCreateMapper;
