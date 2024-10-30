@@ -13,4 +13,5 @@ public interface ActorService {
     void createActor(ActorCreateDto actorCreateDto);
 
     List<Actor> findActorsByIds(List<Long> ids);
+
 }
