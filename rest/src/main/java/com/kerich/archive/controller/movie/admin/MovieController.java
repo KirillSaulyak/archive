@@ -1,5 +1,6 @@
 package com.kerich.archive.controller.movie.admin;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kerich.archive.dto.movie.admin.movie.MovieCreateDto;
 import com.kerich.archive.dto.movie.admin.movie.MovieInfoDto;
 import com.kerich.archive.dto.movie.admin.movie.MovieUpdateDto;
@@ -25,8 +26,8 @@ public class MovieController {
 
     @PostMapping
     public void createMovie(@RequestPart MultipartFile poster, @RequestPart("json") MovieCreateDto movieCreateDto) throws IOException {
-        fileManager.savePoster(poster);
-        //movieService.createMovie(movieCreateDto, poster);
+        //fileManager.savePoster(poster);
+        movieService.createMovie(movieCreateDto, poster);
 
     }
 

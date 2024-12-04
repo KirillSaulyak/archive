@@ -20,7 +20,7 @@ public class ActorController {
     }
 
     @PostMapping
-    public void createActor(@RequestBody ActorCreateDto actorCreateDto) {
+    public void createActor(@RequestBody ActorCreateDto actorCreateDto) throws Exception {
         actorService.createActor(actorCreateDto);
     }
 }

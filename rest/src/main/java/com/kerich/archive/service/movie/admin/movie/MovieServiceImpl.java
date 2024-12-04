@@ -30,7 +30,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @Transactional
-    public void createMovie(MovieCreateDto movieCreateDto, MultipartFile Poster) {
+    public void createMovie(MovieCreateDto movieCreateDto, MultipartFile poster) {
         Movie movie = movieCreateMapper.toEntity(movieCreateDto);
         movie.setPathToPoster("TEMP NOTHING");
         movieRepository.save(movie);

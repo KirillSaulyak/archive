@@ -29,7 +29,6 @@ public class FileManagerImpl implements InitializingBean, FileManager {
         } catch (IOException e) {
             System.out.println(e);
         }
-
     }
 
     @Override

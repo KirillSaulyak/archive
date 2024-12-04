@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public interface MovieService {
     MovieInfoDto getMovieInfoDtoById(Long id);
 
-    void createMovie(MovieCreateDto movieCreateDto, MultipartFile Poster);
+    void createMovie(MovieCreateDto movieCreateDto, MultipartFile poster);
 
     void updateMovie(MovieUpdateDto movieUpdateDto);
 }
