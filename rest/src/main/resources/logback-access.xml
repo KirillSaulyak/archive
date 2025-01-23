@@ -1,9 +1,10 @@
 <configuration>
     <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
 
-    <appender name="elastikSearchAccess" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="net.logstash.logback.encoder.LogstashAccessEncoder" />
-    </appender>
+<!--    <appender name="elastikSearchAccess" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <destination>127.0.0.1:9000</destination>-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashAccessEncoder" />-->
+<!--    </appender>-->
 
-    <appender-ref ref="elastikSearchAccess"/>
+<!--    <appender-ref ref="elastikSearchAccess"/>-->
 </configuration>

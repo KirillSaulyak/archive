@@ -12,37 +12,39 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class LogConfigAspect {
-    @Pointcut("includeLayerExecution() && !excludeLayerExecution()")
-    private void layerExecution() {
+    @Pointcut("includeLayerExecutionPointcut() && !excludeLayerExecutionPointcut()")
+    private void layerExecutionPointcut() {
     }
 
-    @Pointcut("includeConfig()")
-    private void includeLayerExecution() {
+    @Pointcut("includeConfigPointcut()")
+    private void includeLayerExecutionPointcut() {
     }
 
-    @Pointcut("excludeObjectsToSerializer()")
-    private void excludeLayerExecution() {
+    @Pointcut("excludeObjectsToSerializerPointcut()")
+    private void excludeLayerExecutionPointcut() {
     }
 
     @Pointcut("execution(public * com.kerich.archive.config..*(..))")
-    private void includeConfig() {
+    private void includeConfigPointcut() {
     }
 
     @Pointcut("execution(public * com.kerich.archive.config.movie.jsonSerializerConfig.objectsToSerializer..*(..))")
-    private void excludeObjectsToSerializer() {
+    private void excludeObjectsToSerializerPointcut() {
     }
 
-    @Before("layerExecution()")
+    @Before("layerExecutionPointcut()")
     public void logBeforeInitializationConfig(JoinPoint joinPoint) {
         log.atInfo()
+                .addKeyValue("status", StatusMethod.STARTED)
                 .addKeyValue("class", joinPoint.getSignature().getDeclaringTypeName())
                 .addArgument(joinPoint.getSignature().getDeclaringTypeName())
                 .log("Started initialization configuration {}");
     }
 
-    @AfterReturning(pointcut = "layerExecution()")
+    @AfterReturning(pointcut = "layerExecutionPointcut()")
     public void logAfterReturningInitializationConfig(JoinPoint joinPoint) {
         log.atInfo()
+                .addKeyValue("status", StatusMethod.SUCCESSFUL)
                 .addKeyValue("class", joinPoint.getSignature().getDeclaringTypeName())
                 .addArgument(joinPoint.getSignature().getDeclaringTypeName())
                 .log("Successful initialization configuration {}");

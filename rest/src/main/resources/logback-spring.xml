@@ -1,5 +1,16 @@
 <configuration>
-    <appender name="elastikSearch" class="ch.qos.logback.core.ConsoleAppender">
+
+    <appender name="ASYNC_FILE" class="net.logstash.logback.appender.LoggingEventAsyncDisruptorAppender">
+        <ringBufferSize>1024</ringBufferSize>
+        <appender-ref ref="ROLLING_FILE" />
+    </appender>
+
+    <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/rest/rest.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <timeZone>UTC</timeZone>
             <jsonFactoryDecorator class="com.kerich.archive.config.movie.jsonSerializerConfig.JsonSerializerConfig" />
@@ -16,8 +27,8 @@
     </appender>
 
     <root level="INFO">
-        <appender-ref ref="elastikSearch"/>
-<!--        <appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="ASYNC_FILE"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 
 </configuration>

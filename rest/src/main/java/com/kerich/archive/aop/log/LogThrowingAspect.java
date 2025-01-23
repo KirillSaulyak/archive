@@ -15,15 +15,13 @@ public class LogThrowingAspect {
     public void logAfterThrowing(JoinPoint joinPoint, Throwable exception) {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Object[] args = joinPoint.getArgs();
-        String[] parameterNames = methodSignature.getParameterNames();
         log.atError()
                 .setCause(exception)
                 .addKeyValue("class", methodSignature.getDeclaringTypeName())
-                .addKeyValue("returnType", methodSignature.getReturnType())
                 .addKeyValue("method", methodSignature.getName())
-                .addKeyValue("parametersNames", parameterNames.length > 0 ? parameterNames : "")
-                .addKeyValue("parameters", args.length != 0 ? args : "()")
-                .addKeyValue("exceptionMessage", exception.getMessage())
+                .addKeyValue("parameters", args)
+                .addKeyValue("exceptionMessage", exception.getMessage() == null ? "No message available" : exception.getMessage())
+                .addKeyValue("status", StatusMethod.ERROR)
                 .addArgument(methodSignature.getDeclaringTypeName())
                 .addArgument(methodSignature.getName())
                 .log("Exception in {}.{}");

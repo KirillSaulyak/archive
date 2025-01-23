@@ -16,8 +16,8 @@ public class MultipartFileSerializer extends StdSerializer<MultipartFile> {
     public void serialize(MultipartFile file, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
 
-        gen.writeStringField("contentType", file.getContentType());
-        gen.writeNumberField("size", file.getSize());
+        gen.writeStringField("file.contentType", file.getContentType());
+        gen.writeNumberField("file.size", file.getSize());
 
         gen.writeEndObject();
     }
