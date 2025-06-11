@@ -5,7 +5,7 @@ import com.kerich.archive.entity.movie.Translator;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public interface TranslatorInfoShortMapper {
     Translator toEntity(TranslatorInfoShortDto translatorInfoShortDto);
 

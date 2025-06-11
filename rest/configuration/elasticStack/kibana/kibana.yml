@@ -1,0 +1,26 @@
+server:
+  host: "0.0.0.0"
+  shutdownTimeout: "5s"
+  ssl:
+    enabled: true
+    certificate: ${ELASTIC_STACK_KIBANA_CRT_FILE}
+    key: ${ELASTIC_STACK_KIBANA_KEY_FILE}
+
+monitoring.ui.container.elasticsearch.enabled: true
+
+elasticsearch:
+  hosts: ["https://elasticsearch:9200"]
+  serviceAccountToken: ${ELASTIC_STACK_KIBANA_ELASTICSEARCH_SERVICE_ACCOUNTTOKEN}
+  ssl:
+    verificationMode: certificate
+    certificateAuthorities: ${ELASTIC_STACK_KIBANA_CA_CRT_FILE}
+
+xpack:
+  encryptedSavedObjects:
+    encryptionKey: ${ELASTIC_STACK_KIBANA_XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY}
+  reporting:
+    encryptionKey: ${ELASTIC_STACK_KIBANA_XPACK_REPORTING_ENCRYPTIONKEY}
+    roles:
+      enabled: false # Disable deprecated reporting roles
+  security:
+    encryptionKey: ${ELASTIC_STACK_KIBANA_XPACK_SECURITY_ENCRYPTIONKEY}

@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public abstract class MovieUpdateMapper {
     @Autowired
     protected ActorService actorService;

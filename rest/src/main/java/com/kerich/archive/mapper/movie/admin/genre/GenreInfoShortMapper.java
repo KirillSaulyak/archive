@@ -4,7 +4,7 @@ import com.kerich.archive.dto.movie.admin.genre.GenreInfoShortDto;
 import com.kerich.archive.entity.movie.Genre;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public interface GenreInfoShortMapper {
     Genre toEntity(GenreInfoShortDto genreInfoShortDto);
 

@@ -29,7 +29,18 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
 
+### Common ###
 .logs
+.env
+configuration/helpSetting/
+
+### Cursor ###
+.cursor/
+.jpb/
+
+### ElasticStack ###
+configuration/elasticStack/secrets/
+
+### Postgresql ###
+configuration/postgresql/secrets/

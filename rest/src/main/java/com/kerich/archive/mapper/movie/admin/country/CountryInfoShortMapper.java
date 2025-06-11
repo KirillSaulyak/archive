@@ -4,7 +4,7 @@ import com.kerich.archive.dto.movie.admin.country.CountryInfoShortDto;
 import com.kerich.archive.entity.movie.Country;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public interface CountryInfoShortMapper {
     Country toEntity(CountryInfoShortDto countryInfoShortDto);
 

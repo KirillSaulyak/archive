@@ -4,7 +4,7 @@ import com.kerich.archive.dto.movie.admin.type.TypeInfoShortDto;
 import com.kerich.archive.entity.movie.Type;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public interface TypeInfoShortMapper {
     Type toEntity(TypeInfoShortDto typeInfoShortDto);
 

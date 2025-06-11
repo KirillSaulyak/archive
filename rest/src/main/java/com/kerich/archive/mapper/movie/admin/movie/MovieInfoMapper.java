@@ -7,7 +7,7 @@ import org.mapstruct.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public interface MovieInfoMapper {
     @Mapping(target = "actorIds", expression = "java(actorsToActorIds(movie.getActors()))")
     @Mapping(target = "countryIds", expression = "java(countriesToCountryIds(movie.getCountries()))")

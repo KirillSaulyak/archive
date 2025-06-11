@@ -1,70 +1,253 @@
+secrets:
+  postgres_user:
+    file: ${POSTGRES_USER_FILE_HOST}
+  postgres_password:
+    file: ${POSTGRES_PASSWORD_FILE_HOST}
+  postgres_db:
+    file: ${POSTGRES_DB_FILE_HOST}
+
+  elastic_stack_common_ca_crt:
+    file: ${ELASTIC_STACK_COMMON_CA_CRT_FILE_HOST}
+
+  elastic_stack_elasticsearch_ca_key:
+    file: ${ELASTIC_STACK_ELASTICSEARCH_CA_KEY_FILE_HOST}
+  elastic_stack_elasticsearch_crt:
+    file: ${ELASTIC_STACK_ELASTICSEARCH_CRT_FILE_HOST}
+  elastic_stack_elasticsearch_key:
+    file: ${ELASTIC_STACK_ELASTICSEARCH_KEY_FILE_HOST}
+
+  elastic_stack_kibana_crt:
+    file: ${ELASTIC_STACK_KIBANA_CRT_FILE_HOST}
+  elastic_stack_kibana_key:
+    file: ${ELASTIC_STACK_KIBANA_KEY_FILE_HOST}
+
+  elastic_stack_logstash_server_crt:
+    file: ${ELASTIC_STACK_LOGSTASH_SERVER_CRT_FILE_HOST}
+  elastic_stack_logstash_server_key:
+    file: ${ELASTIC_STACK_LOGSTASH_SERVER_KEY_FILE_HOST}
+
+  elastic_stack_fleet_server_crt:
+    file: ${ELASTIC_STACK_FLEET_SERVER_CRT}
+  elastic_stack_fleet_server_key:
+    file: ${ELASTIC_STACK_FLEET_SERVER_KEY}
+
+volumes:
+  postgres_data:
+  elasticsearch_data:
+
 services:
   postgres:
     image: postgres:12.22-bookworm
-    container_name: postgresql
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: archive
+      POSTGRES_USER_FILE: ${POSTGRES_USER_FILE}
+      POSTGRES_PASSWORD_FILE: ${POSTGRES_PASSWORD_FILE}
+      POSTGRES_DB_FILE: ${POSTGRES_DB_FILE}
     volumes:
-      - ../../DB/postgres_data:/var/lib/postgresql/data
-      - ./configuration/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
-      - ./logs/DB:/var/lib/postgresql/logs
-    command: ["postgres", "-c", "config_file=/var/lib/postgresql/data/postgresql.conf"]
-    profiles:
-      - dev
+      - postgres_data:${POSTGRES_DATA_PATH}
+      - ${POSTGRES_CONFIG_FILE_HOST}:${POSTGRES_CONFIG_FILE}:ro
+    secrets:
+      - postgres_user
+      - postgres_password
+      - postgres_db
+    logging:
+      driver: ${COMMON_LOG_DRIVER}
+      options:
+        max-size: ${COMMON_LOG_MAX_SIZE}
+        max-file: ${COMMON_LOG_MAX_FILE}
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
 
-  filebeat:
-    image: elastic/filebeat:8.16.2
-    container_name: filebeat
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-wolfi:8.17.2
+    container_name: elasticsearch
     ports:
-      - "9000:9000"
+      - "9200:9200"
+    environment:
+      - ELASTIC_PASSWORD=${ELASTIC_STACK_ELASTICSEARCH_ELASTIC_PASSWORD}
+      - ELASTIC_STACK_ELASTICSEARCH_CA_CRT_FILE=${ELASTIC_STACK_ELASTICSEARCH_CA_CRT_FILE}
+      - ELASTIC_STACK_ELASTICSEARCH_CRT_FILE=${ELASTIC_STACK_ELASTICSEARCH_CRT_FILE}
+      - ELASTIC_STACK_ELASTICSEARCH_KEY_FILE=${ELASTIC_STACK_ELASTICSEARCH_KEY_FILE}
     volumes:
-      - ./configuration/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
-#      - ./logs:/var/lib/docker/containers:ro
-      - ./logs/rest:/usr/share/filebeat/logs/rest:ro
-      - ./logs/DB:/usr/share/filebeat/logs/DB:ro
-      - ./logs/logstash:/usr/share/filebeat/logs/logstash:ro
-    entrypoint: ["filebeat", "-e"]
+      - elasticsearch_data:${ELASTIC_STACK_ELASTICSEARCH_DATA_PATH}
+      - ${ELASTIC_STACK_ELASTICSEARCH_YML_FILE_HOST}:${ELASTIC_STACK_ELASTICSEARCH_YML_FILE}:ro
+    secrets:
+      - source: elastic_stack_common_ca_crt
+        target: ${ELASTIC_STACK_ELASTICSEARCH_CA_CRT_FILE}
+      - source: elastic_stack_elasticsearch_ca_key
+        target: ${ELASTIC_STACK_ELASTICSEARCH_CA_KEY_FILE}
+      - source: elastic_stack_elasticsearch_crt
+        target: ${ELASTIC_STACK_ELASTICSEARCH_CRT_FILE}
+      - source: elastic_stack_elasticsearch_key
+        target: ${ELASTIC_STACK_ELASTICSEARCH_KEY_FILE}
+    logging:
+      driver: ${COMMON_LOG_DRIVER}
+      options:
+        max-size: ${COMMON_LOG_MAX_SIZE}
+        max-file: ${COMMON_LOG_MAX_FILE}
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2'
+        reservations:
+          memory: 1G
+          cpus: '1'
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.17.2
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTIC_STACK_KIBANA_CRT_FILE=${ELASTIC_STACK_KIBANA_CRT_FILE}
+      - ELASTIC_STACK_KIBANA_KEY_FILE=${ELASTIC_STACK_KIBANA_KEY_FILE}
+      - ELASTIC_STACK_KIBANA_ELASTICSEARCH_SERVICE_ACCOUNTTOKEN=${ELASTIC_STACK_KIBANA_ELASTICSEARCH_SERVICE_ACCOUNTTOKEN}
+      - ELASTIC_STACK_KIBANA_CA_CRT_FILE=${ELASTIC_STACK_KIBANA_CA_CRT_FILE}
+      - ELASTIC_STACK_KIBANA_XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY=${ELASTIC_STACK_KIBANA_XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY}
+      - ELASTIC_STACK_KIBANA_XPACK_REPORTING_ENCRYPTIONKEY=${ELASTIC_STACK_KIBANA_XPACK_REPORTING_ENCRYPTIONKEY}
+      - ELASTIC_STACK_KIBANA_XPACK_SECURITY_ENCRYPTIONKEY=${ELASTIC_STACK_KIBANA_XPACK_SECURITY_ENCRYPTIONKEY}
+    volumes:
+      - ${ELASTIC_STACK_KIBANA_YML_FILE_HOST}:${ELASTIC_STACK_KIBANA_YML_FILE}:ro
+    secrets:
+      - source: elastic_stack_common_ca_crt
+        target: ${ELASTIC_STACK_KIBANA_CA_CRT_FILE}
+      - source: elastic_stack_kibana_crt
+        target: ${ELASTIC_STACK_KIBANA_CRT_FILE}
+      - source: elastic_stack_kibana_key
+        target: ${ELASTIC_STACK_KIBANA_KEY_FILE}
+    logging:
+      driver: ${COMMON_LOG_DRIVER}
+      options:
+        max-size: ${COMMON_LOG_MAX_SIZE}
+        max-file: ${COMMON_LOG_MAX_FILE}
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+          cpus: '1'
+        reservations:
+          memory: 2G
+          cpus: '0.5'
     depends_on:
-      - logstash
-    profiles:
-      - dev
+      - elasticsearch
 
   logstash:
     build:
       context: ./dockerFile/logstash
-      dockerfile: DockerFile
     container_name: logstash
     ports:
       - "5044:5044"
-      - "9600:9600"
+    environment:
+      - ELASTIC_STACK_LOGSTASH_CA_CRT_FILE=${ELASTIC_STACK_LOGSTASH_CA_CRT_FILE}
+      - ELASTIC_STACK_LOGSTASH_SERVER_CRT_FILE=${ELASTIC_STACK_LOGSTASH_SERVER_CRT_FILE}
+      - ELASTIC_STACK_LOGSTASH_SERVER_KEY_FILE=${ELASTIC_STACK_LOGSTASH_SERVER_KEY_FILE}
+      - ELASTIC_STACK_LOGSTASH_CONF_OUTPUT_ELASTICSEARCH_API_KEY=${ELASTIC_STACK_LOGSTASH_CONF_OUTPUT_ELASTICSEARCH_API_KEY}
     volumes:
-      - ./configuration/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./configuration/elasticStack/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./configuration/elasticStack/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    secrets:
+      - source: elastic_stack_common_ca_crt
+        target: ${ELASTIC_STACK_LOGSTASH_CA_CRT_FILE}
+      - source: elastic_stack_logstash_server_crt
+        target: ${ELASTIC_STACK_LOGSTASH_SERVER_CRT_FILE}
+      - source: elastic_stack_logstash_server_key
+        target: ${ELASTIC_STACK_LOGSTASH_SERVER_KEY_FILE}
+    logging:
+      driver: ${COMMON_LOG_DRIVER}
+      options:
+        max-size: ${COMMON_LOG_MAX_SIZE}
+        max-file: ${COMMON_LOG_MAX_FILE}
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
     depends_on:
       - elasticsearch
-    profiles:
-      - dev
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+  fleet-server: #IMPORTANT for self-signed certificates! To avoid the warning caught exception while handling client http traffic, you need to add this line: ssl.certificate_authorities: ["/path/to/your/fleet-server/ca.crt"] on the page in Kibana: Fleet->Settings->Outputs->elasticsearch->Advanced YAML configuration
+    image: docker.elastic.co/elastic-agent/elastic-agent-wolfi:8.17.2
+    container_name: fleet-server
+    user: root
     ports:
-      - "9200:9200"
-    profiles:
-      - dev
+      - "8220:8220"
+    environment:
+      - FLEET_SERVER_ENABLE=1
+      - FLEET_URL=https://fleet-server:8220
+      - FLEET_SERVER_SERVICE_TOKEN=${ELASTIC_STACK_FLEET_SERVER_SERVICE_TOKEN}
+      - FLEET_SERVER_ELASTICSEARCH_HOST=https://elasticsearch:9200
+      - FLEET_SERVER_ELASTICSEARCH_CA=${ELASTIC_STACK_FLEET_SERVER_CA_CRT_FILE}
+      - FLEET_CA=${ELASTIC_STACK_FLEET_SERVER_CA_CRT_FILE}
+      - FLEET_SERVER_CERT=${ELASTIC_STACK_FLEET_SERVER_CRT_FILE}
+      - FLEET_SERVER_CERT_KEY=${ELASTIC_STACK_FLEET_SERVER_KEY_FILE}
+    secrets:
+      - source: elastic_stack_common_ca_crt
+        target: ${ELASTIC_STACK_FLEET_SERVER_CA_CRT_FILE}
+      - source: elastic_stack_fleet_server_crt
+        target: ${ELASTIC_STACK_FLEET_SERVER_CRT_FILE}
+      - source: elastic_stack_fleet_server_key
+        target: ${ELASTIC_STACK_FLEET_SERVER_KEY_FILE}
+    logging:
+      driver: ${COMMON_LOG_DRIVER}
+      options:
+        max-size: ${COMMON_LOG_MAX_SIZE}
+        max-file: ${COMMON_LOG_MAX_FILE}
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    depends_on:
+      - logstash
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.5
-    container_name: kibana
+  elastic-agent:
+    image: docker.elastic.co/elastic-agent/elastic-agent-wolfi:8.17.2
+    container_name: elastic-agent
+    user: root
+    restart: on-failure
     environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    ports:
-      - "5601:5601"
-    profiles:
-      - dev
+      - FLEET_URL=https://fleet-server:8220
+      - FLEET_ENROLL=1
+      - FLEET_CA=${ELASTIC_STACK_ELASTIC_AGENT_CA_CRT_FILE}
+      - FLEET_ENROLLMENT_TOKEN=${ELASTIC_STACK_FLEET_ENROLLMENT_TOKEN}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    secrets:
+      - source: elastic_stack_common_ca_crt
+        target: ${ELASTIC_STACK_ELASTIC_AGENT_CA_CRT_FILE}
+    logging:
+      driver: ${COMMON_LOG_DRIVER}
+      options:
+        max-size: ${COMMON_LOG_MAX_SIZE}
+        max-file: ${COMMON_LOG_MAX_FILE}
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    depends_on:
+      - fleet-server

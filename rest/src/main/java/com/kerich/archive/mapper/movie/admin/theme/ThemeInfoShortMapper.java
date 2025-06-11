@@ -4,7 +4,7 @@ import com.kerich.archive.dto.movie.admin.theme.ThemeInfoShortDto;
 import com.kerich.archive.entity.movie.Theme;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(config = com.kerich.archive.config.movie.MupStructConfigDefault.class)
 public interface ThemeInfoShortMapper {
     Theme toEntity(ThemeInfoShortDto themeInfoShortDto);
 

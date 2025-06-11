@@ -1,0 +1,24 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+node:
+  name: es01
+
+discovery:
+  type: single-node
+
+xpack:
+  security:
+    http:
+      ssl:
+        enabled: true
+        certificate_authorities: ${ELASTIC_STACK_ELASTICSEARCH_CA_CRT_FILE}
+        certificate: ${ELASTIC_STACK_ELASTICSEARCH_CRT_FILE}
+        key: ${ELASTIC_STACK_ELASTICSEARCH_KEY_FILE}
+    transport:
+      ssl:
+        enabled: true
+        certificate_authorities: ${ELASTIC_STACK_ELASTICSEARCH_CA_CRT_FILE}
+        certificate: ${ELASTIC_STACK_ELASTICSEARCH_CRT_FILE}
+        key: ${ELASTIC_STACK_ELASTICSEARCH_KEY_FILE}
+        verification_mode: certificate
