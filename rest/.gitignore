@@ -29,9 +29,25 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### Java ###
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.ctxt
+.mtj.tmp/
+hs_err_pid*
+replay_pid*
+
+### Archives ###
+*.zip
+*.tar.gz
+*.rar
 
 ### Common ###
 .logs
+*.log
 .env
 configuration/helpSetting/
 
