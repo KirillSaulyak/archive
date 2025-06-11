@@ -37,9 +37,12 @@ next-env.d.ts
 # secret files
 links.js
 
+### Cursor ###
+.cursor/
+.jpb/
+
 # IDE
 .vscode/
-.cursor/
 .idea/
 *.swp
 *.swo
