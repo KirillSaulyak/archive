@@ -56,7 +56,7 @@ export default function MainPage({ store }) {
                         images.map((img) => (
 
                             <Grid>
-                                <Link href={"/movies"} passHref store={store}>
+                                <Link href={"/movie/admin"} passHref store={store}>
                                     <Card sx={{ maxWidth: 345 }} key={img.id}>
                                         <CardActionArea>
                                             <CardMedia
