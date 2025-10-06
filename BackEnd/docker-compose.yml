@@ -1,0 +1,15 @@
+volumes:
+ mssql_data:
+
+services:
+ mssql:
+  image: mcr.microsoft.com/mssql/server:2025-latest
+  container_name: mssql
+  ports:
+    - "1433:1433"
+  environment:
+   MSSQL_SA_PASSWORD: "12345678aA!"
+   ACCEPT_EULA: "Y"
+  volumes:
+    - mssql_data:/var/opt/mssql
+  restart: on-failure

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Abstractions\Services\**" />
+    <EmbeddedResource Remove="Abstractions\Services\**" />
+    <None Remove="Abstractions\Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstractions\Movie\Repositories\" />
+    <Folder Include="Abstractions\Movie\Services\" />
+    <Folder Include="DTOs\Movie\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,196 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\type.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\type.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\theme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\theme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\translator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\translator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\director.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\director.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\entities\\movie\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\entities\\movie\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.core\\validators\\movie\\actorvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3BBEB563-6153-49C2-ADDC-F30D46407910}|Archive.Core\\Archive.Core.csproj|solutionrelative:archive.core\\validators\\movie\\actorvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C681049-0EDA-444C-A0D1-18FA959029D3}|Archive.MVC\\Archive.MVC.csproj|c:\\users\\kerich\\desktop\\c#\\myprojects\\archive\\backend\\archive\\archive.mvc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3C681049-0EDA-444C-A0D1-18FA959029D3}|Archive.MVC\\Archive.MVC.csproj|solutionrelative:archive.mvc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Movie.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Movie.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Movie.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Movie.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Movie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:45:49.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Type.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Type.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Type.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Type.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Type.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:42:20.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Translator.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Translator.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Translator.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Translator.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Translator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:41:40.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Theme.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Theme.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Theme.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Theme.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Theme.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswCEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:40:10.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Genre.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Genre.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Genre.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Genre.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Genre.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswCEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:38:35.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Director.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Director.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Director.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Director.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Director.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:36:10.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Actor.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Actor.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Actor.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Actor.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Actor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T19:15:31.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Country.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Country.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Entities\\Movie\\Country.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Entities\\Movie\\Country.cs",
+              "RelativeToolTip": "Archive.Core\\Entities\\Movie\\Country.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T16:24:10.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.MVC\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Archive.MVC\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.MVC\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Archive.MVC\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-04T14:45:32.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ActorValidator.cs",
+              "DocumentMoniker": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Validators\\Movie\\ActorValidator.cs",
+              "RelativeDocumentMoniker": "Archive.Core\\Validators\\Movie\\ActorValidator.cs",
+              "ToolTip": "C:\\Users\\kerich\\Desktop\\C#\\myProjects\\archive\\BackEnd\\Archive\\Archive.Core\\Validators\\Movie\\ActorValidator.cs",
+              "RelativeToolTip": "Archive.Core\\Validators\\Movie\\ActorValidator.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T20:50:59.596Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
