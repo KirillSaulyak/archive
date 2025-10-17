@@ -1,4 +1,4 @@
-﻿using Archive.Core.Entities.Movie;
+﻿using Archive.Core.Entities.Movies;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Archive.Core.Validators.Movie
+namespace Archive.Core.Validators.Movies
 {
     public class ActorValidator : AbstractValidator<Actor>
     {

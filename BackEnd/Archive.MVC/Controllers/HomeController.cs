@@ -1,4 +1,5 @@
-using Archive.Core.Entities.Movie;
+using Archive.Core.Entities.Movies;
+using Archive.Infrastructure;
 using Archive.MVC.Extensions;
 using Archive.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace Archive.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+     
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;

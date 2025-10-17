@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Movie\" />
+    <Folder Include="Movies\client\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Archive.Infrastructure\Archive.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,9 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Movie\Repositories\" />
-    <Folder Include="Abstractions\Movie\Services\" />
-    <Folder Include="DTOs\Movie\" />
+    <Folder Include="Abstractions\Movies\Services\admin\" />
+    <Folder Include="Abstractions\Movies\Services\client\" />
+    <Folder Include="DTOs\Movies\admin\" />
+    <Folder Include="DTOs\Movies\client\" />
   </ItemGroup>
 
   <ItemGroup>
