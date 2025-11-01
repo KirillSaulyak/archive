@@ -1,11 +1,11 @@
-﻿using Archive.Core.Entities.Movies;
+﻿using Archive.Core.Entities.MovieSpace;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Type = Archive.Core.Entities.Movies.Type;
+using Type = Archive.Core.Entities.MovieSpace.Type;
 
 namespace Archive.Infrastructure.Persistence
 {

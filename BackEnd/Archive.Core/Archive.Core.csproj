@@ -13,13 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Movies\Services\admin\" />
-    <Folder Include="Abstractions\Movies\Services\client\" />
-    <Folder Include="DTOs\Movies\admin\" />
-    <Folder Include="DTOs\Movies\client\" />
+    <Folder Include="Abstractions\MovieSpace\Services\client\" />
+    <Folder Include="DTOs\MovieSpace\client\" />
+    <Folder Include="Mappers\MovieSpace\Client\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.1.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
   </ItemGroup>

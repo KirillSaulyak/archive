@@ -31,8 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\admin\" />
-    <Folder Include="Controllers\client\" />
+    <Folder Include="Controllers\MovieSpace\admin\" />
+    <Folder Include="Controllers\MovieSpace\client\" />
+    <Folder Include="Controllers\MovieSpace\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-using Archive.Core.Entities.Movies;
+using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.DTOs.MovieSpace.admin.Actor;
+using Archive.Core.Entities.MovieSpace;
 using Archive.Infrastructure;
 using Archive.MVC.Extensions;
 using Archive.MVC.Models;
@@ -7,15 +9,8 @@ using System.Diagnostics;
 
 namespace Archive.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger, IActorService actorService) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-     
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -27,13 +22,14 @@ namespace Archive.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(Actor model)
+        public async Task<IActionResult> Index(ActorCreateDto actorCreateDto)
         {
-            if (!await this.IsValidAsync(model))  // Общая валидация
+            if (!await this.IsValidAsync(actorCreateDto))  // Общая валидация
             {
-                return View(model);  // Ошибки в view
+                return View(actorCreateDto);  // Ошибки в view
             }
-
+           
+            await actorService.UpdateActorAsync(new ActorUpdateDto( new Guid("e8477632-5f15-4fb0-0eb3-08de11b1431a"),  "cheburek2202"));
             // Сохранение (например, через EF)
             return View();
         }

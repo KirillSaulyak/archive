@@ -1,5 +1,9 @@
-using Archive.Core.Validators.Movies;
+using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.Entities.MovieSpace;
+using Archive.Core.Mappers.MovieSpace.Admin;
+using Archive.Core.Validators.MovieSpace.Actor;
 using Archive.Infrastructure.Persistence;
+using Archive.Services.MovieSpace.admin;
 using FluentValidation;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +18,14 @@ namespace Archive.MVC
             var builder = WebApplication.CreateBuilder(args);
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ArchiveDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            builder.Services.AddValidatorsFromAssemblyContaining<ActorValidator>();
 
+            builder.Services.AddDbContext<ArchiveDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            
+            builder.Services.AddValidatorsFromAssemblyContaining<ActorCreateDtoValidator>();
+            
+            builder.Services.AddScoped<IActorService,ActorService>();
+
+            builder.Services.AddAutoMapper(config => config.AddProfile<ActorMapper>());
             string? mssqlDbName = Environment.GetEnvironmentVariable("MSSQL_DB_NAME");
             string? mssqlUser = Environment.GetEnvironmentVariable("MSSQL_USER");
             string? mssqlPassword = Environment.GetEnvironmentVariable("MSSQL_PASSWORD");
