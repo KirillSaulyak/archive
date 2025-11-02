@@ -26,7 +26,7 @@ namespace Archive.Infrastructure.Persistence.EntityConfigurations.MovieSpace
             builder.HasMany(movie => movie.Genres).WithMany(genre => genre.Movies);
             builder.HasMany(movie => movie.Themes).WithMany(theme => theme.Movies);
             builder.HasMany(movie => movie.Translators).WithMany(translator => translator.Movies);
-            builder.HasMany(movie => movie.Types).WithMany(type => type.Movies);
+            builder.HasMany(movie => movie.Categories).WithMany(category => category.Movies);
         }
     }
 }

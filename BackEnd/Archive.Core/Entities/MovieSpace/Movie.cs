@@ -10,11 +10,11 @@
         public string? OriginalName { get; set; }
         public string? PathToPoster { get; set; }
         public IList<Actor>? Actors { get; set; }
+        public IList<Category>? Categories { get; set; }
         public IList<Country>? Countries { get; set; }
         public IList<Director>? Directors { get; set; }
         public IList<Genre>? Genres { get; set; }
         public IList<Theme>? Themes { get; set; }
         public IList<Translator>? Translators { get; set; }
-        public IList<Type>? Types { get; set; }
     }
 }

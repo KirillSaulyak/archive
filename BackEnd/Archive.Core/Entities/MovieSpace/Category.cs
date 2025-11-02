@@ -1,9 +1,10 @@
-﻿namespace Archive.Core.Entities.MovieSpace
+namespace Archive.Core.Entities.MovieSpace
 {
-    public class Type
+    public class Category
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public IList<Movie>? Movies { get; set; }
     }
 }
+

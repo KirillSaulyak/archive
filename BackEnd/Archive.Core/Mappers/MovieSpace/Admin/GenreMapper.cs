@@ -1,4 +1,4 @@
-﻿using Archive.Core.DTOs.MovieSpace.admin.Actor;
+using Archive.Core.DTOs.MovieSpace.admin.Genre;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 using System;
@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace Archive.Core.Mappers.MovieSpace.Admin
 {
-    public class ActorMapper : Profile
+    public class GenreMapper : Profile
     {
-        public ActorMapper()
+        public GenreMapper()
         {
-            CreateMap<ActorCreateDto, Actor>();
+            CreateMap<GenreCreateDto, Genre>();
 
-            CreateMap<Actor, ActorUpdateDto>()
+            CreateMap<Genre, GenreUpdateDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
+

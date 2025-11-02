@@ -3,7 +3,6 @@ using Archive.Core.DTOs.MovieSpace.admin.Actor;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Infrastructure;
 using Archive.MVC.Extensions;
-using Archive.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -32,12 +31,6 @@ namespace Archive.MVC.Controllers
             await actorService.UpdateActorAsync(new ActorUpdateDto( new Guid("e8477632-5f15-4fb0-0eb3-08de11b1431a"),  "cheburek2202"));
             // Сохранение (например, через EF)
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

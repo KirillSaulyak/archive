@@ -1,4 +1,4 @@
-﻿using Archive.Core.DTOs.MovieSpace.admin.Actor;
+using Archive.Core.DTOs.MovieSpace.admin.Country;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 using System;
@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace Archive.Core.Mappers.MovieSpace.Admin
 {
-    public class ActorMapper : Profile
+    public class CountryMapper : Profile
     {
-        public ActorMapper()
+        public CountryMapper()
         {
-            CreateMap<ActorCreateDto, Actor>();
+            CreateMap<CountryCreateDto, Country>();
 
-            CreateMap<Actor, ActorUpdateDto>()
+            CreateMap<Country, CountryUpdateDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
+

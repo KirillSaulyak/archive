@@ -37,7 +37,7 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("ActorMovie");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Actor", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Actor", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,23 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Actors");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Country", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Country", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +85,7 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Director", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Director", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +101,7 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Directors");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Genre", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Genre", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,7 +117,7 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Movie", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Movie", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,7 +150,7 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Theme", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Theme", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,7 +166,7 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Themes");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Translator", b =>
+            modelBuilder.Entity("Archive.Core.Entities.MovieSpace.Translator", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,20 +182,19 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("Translators");
                 });
 
-            modelBuilder.Entity("Archive.Core.Entities.Movies.Type", b =>
+            modelBuilder.Entity("CategoryMovie", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("CategoriesId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("nvarchar(45)");
+                    b.Property<Guid>("MoviesId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoriesId", "MoviesId");
 
-                    b.ToTable("Types");
+                    b.HasIndex("MoviesId");
+
+                    b.ToTable("CategoryMovie");
                 });
 
             modelBuilder.Entity("CountryMovie", b =>
@@ -257,30 +272,30 @@ namespace Archive.Infrastructure.Migrations
                     b.ToTable("MovieTranslator");
                 });
 
-            modelBuilder.Entity("MovieType", b =>
-                {
-                    b.Property<Guid>("MoviesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TypesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("MoviesId", "TypesId");
-
-                    b.HasIndex("TypesId");
-
-                    b.ToTable("MovieType");
-                });
-
             modelBuilder.Entity("ActorMovie", b =>
                 {
-                    b.HasOne("Archive.Core.Entities.Movies.Actor", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Actor", null)
                         .WithMany()
                         .HasForeignKey("ActorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CategoryMovie", b =>
+                {
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -289,13 +304,13 @@ namespace Archive.Infrastructure.Migrations
 
             modelBuilder.Entity("CountryMovie", b =>
                 {
-                    b.HasOne("Archive.Core.Entities.Movies.Country", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Country", null)
                         .WithMany()
                         .HasForeignKey("CountriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -304,13 +319,13 @@ namespace Archive.Infrastructure.Migrations
 
             modelBuilder.Entity("DirectorMovie", b =>
                 {
-                    b.HasOne("Archive.Core.Entities.Movies.Director", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Director", null)
                         .WithMany()
                         .HasForeignKey("DirectorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -319,13 +334,13 @@ namespace Archive.Infrastructure.Migrations
 
             modelBuilder.Entity("GenreMovie", b =>
                 {
-                    b.HasOne("Archive.Core.Entities.Movies.Genre", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Genre", null)
                         .WithMany()
                         .HasForeignKey("GenresId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -334,13 +349,13 @@ namespace Archive.Infrastructure.Migrations
 
             modelBuilder.Entity("MovieTheme", b =>
                 {
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Archive.Core.Entities.Movies.Theme", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Theme", null)
                         .WithMany()
                         .HasForeignKey("ThemesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -349,30 +364,15 @@ namespace Archive.Infrastructure.Migrations
 
             modelBuilder.Entity("MovieTranslator", b =>
                 {
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Movie", null)
                         .WithMany()
                         .HasForeignKey("MoviesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Archive.Core.Entities.Movies.Translator", null)
+                    b.HasOne("Archive.Core.Entities.MovieSpace.Translator", null)
                         .WithMany()
                         .HasForeignKey("TranslatorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MovieType", b =>
-                {
-                    b.HasOne("Archive.Core.Entities.Movies.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Archive.Core.Entities.Movies.Type", null)
-                        .WithMany()
-                        .HasForeignKey("TypesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

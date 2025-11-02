@@ -24,6 +24,18 @@ namespace Archive.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
                 {
@@ -101,18 +113,6 @@ namespace Archive.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Types",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(45)", maxLength: 45, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Types", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ActorMovie",
                 columns: table => new
                 {
@@ -130,6 +130,30 @@ namespace Archive.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ActorMovie_Movies_MoviesId",
+                        column: x => x.MoviesId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryMovie",
+                columns: table => new
+                {
+                    CategoriesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MoviesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryMovie", x => new { x.CategoriesId, x.MoviesId });
+                    table.ForeignKey(
+                        name: "FK_CategoryMovie_Categories_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CategoryMovie_Movies_MoviesId",
                         column: x => x.MoviesId,
                         principalTable: "Movies",
                         principalColumn: "Id",
@@ -256,33 +280,14 @@ namespace Archive.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "MovieType",
-                columns: table => new
-                {
-                    MoviesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TypesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MovieType", x => new { x.MoviesId, x.TypesId });
-                    table.ForeignKey(
-                        name: "FK_MovieType_Movies_MoviesId",
-                        column: x => x.MoviesId,
-                        principalTable: "Movies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MovieType_Types_TypesId",
-                        column: x => x.TypesId,
-                        principalTable: "Types",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_ActorMovie_MoviesId",
                 table: "ActorMovie",
+                column: "MoviesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryMovie_MoviesId",
+                table: "CategoryMovie",
                 column: "MoviesId");
 
             migrationBuilder.CreateIndex(
@@ -309,11 +314,6 @@ namespace Archive.Infrastructure.Migrations
                 name: "IX_MovieTranslator_TranslatorsId",
                 table: "MovieTranslator",
                 column: "TranslatorsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MovieType_TypesId",
-                table: "MovieType",
-                column: "TypesId");
         }
 
         /// <inheritdoc />
@@ -321,6 +321,9 @@ namespace Archive.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ActorMovie");
+
+            migrationBuilder.DropTable(
+                name: "CategoryMovie");
 
             migrationBuilder.DropTable(
                 name: "CountryMovie");
@@ -338,10 +341,10 @@ namespace Archive.Infrastructure.Migrations
                 name: "MovieTranslator");
 
             migrationBuilder.DropTable(
-                name: "MovieType");
+                name: "Actors");
 
             migrationBuilder.DropTable(
-                name: "Actors");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Countries");
@@ -356,13 +359,10 @@ namespace Archive.Infrastructure.Migrations
                 name: "Themes");
 
             migrationBuilder.DropTable(
-                name: "Translators");
-
-            migrationBuilder.DropTable(
                 name: "Movies");
 
             migrationBuilder.DropTable(
-                name: "Types");
+                name: "Translators");
         }
     }
 }

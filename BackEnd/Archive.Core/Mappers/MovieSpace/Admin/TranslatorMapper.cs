@@ -1,4 +1,4 @@
-﻿using Archive.Core.DTOs.MovieSpace.admin.Actor;
+using Archive.Core.DTOs.MovieSpace.admin.Translator;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 using System;
@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace Archive.Core.Mappers.MovieSpace.Admin
 {
-    public class ActorMapper : Profile
+    public class TranslatorMapper : Profile
     {
-        public ActorMapper()
+        public TranslatorMapper()
         {
-            CreateMap<ActorCreateDto, Actor>();
+            CreateMap<TranslatorCreateDto, Translator>();
 
-            CreateMap<Actor, ActorUpdateDto>()
+            CreateMap<Translator, TranslatorUpdateDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }
+
