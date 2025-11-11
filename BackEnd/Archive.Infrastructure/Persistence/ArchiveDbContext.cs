@@ -1,10 +1,5 @@
 ﻿using Archive.Core.Entities.MovieSpace;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Category = Archive.Core.Entities.MovieSpace.Category;
 
 namespace Archive.Infrastructure.Persistence

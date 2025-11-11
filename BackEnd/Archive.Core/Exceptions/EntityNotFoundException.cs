@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Archive.Core.Exceptions
 {
-    public class EntityNotFoundException: Exception
+    public class EntityNotFoundException : Exception
     {
         public EntityNotFoundException()
         {

@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MovieSpace\Client\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Archive.Core\Archive.Core.csproj" />
     <ProjectReference Include="..\Archive.Infrastructure\Archive.Infrastructure.csproj" />
   </ItemGroup>

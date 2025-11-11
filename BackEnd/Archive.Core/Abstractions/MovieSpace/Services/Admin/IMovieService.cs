@@ -1,13 +1,13 @@
-﻿using Archive.Core.DTOs.MovieSpace.Admin.Movie;
-using Archive.Core.Entities.MovieSpace;
+﻿using Archive.Core.DTOs.Common;
+using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 
 namespace Archive.Core.Abstractions.MovieSpace.Services.admin
 {
     public interface IMovieService
     {
-        Task CreateMovieAsync(MovieCreateDto movieCreateDto);
+        Task CreateMovieAsync(MovieCreateDto movieCreateDto, UploadFileDto uploadFileDto);
         Task<MovieUpdateDto> GetMovieByIdForUpdateAsync(Guid id);
-        Task UpdateMovieAsync(MovieUpdateDto movieUpdateDto);
+        Task UpdateMovieAsync(MovieUpdateDto movieUpdateDto, UploadFileDto? uploadFileDto);
         Task DeleteMovieById(Guid id);
     }
 }

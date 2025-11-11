@@ -1,11 +1,15 @@
+using Archive.Core.Abstractions.Common.Utilities;
 using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Mappers.MovieSpace.Admin;
 using Archive.Core.Validators.MovieSpace.Actor;
 using Archive.Infrastructure.Persistence;
-using Archive.Services.MovieSpace.admin;
+using Archive.Infrastructure.Utilities;
+using Archive.Services.Abstractions.Factories.Common;
+using Archive.Services.Abstractions.Factories.MovieSpace;
+using Archive.Services.Factories.Common;
+using Archive.Services.Factories.MovieSpace;
+using Archive.Services.Services.MovieSpace.Admin;
 using FluentValidation;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 
 namespace Archive.MVC
@@ -20,12 +24,17 @@ namespace Archive.MVC
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<ArchiveDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            
+
             builder.Services.AddValidatorsFromAssemblyContaining<ActorCreateDtoValidator>();
-            
-            builder.Services.AddScoped<IActorService,ActorService>();
+
+            //builder.Services.AddScoped<IActorService, ActorService>();
+            builder.Services.AddScoped<IMovieService, MovieService>();
+            builder.Services.AddScoped<IFileManager, FileManager>();
+            builder.Services.AddScoped<IMovieFilePathFactory, MovieFilePathFactory>();
+            builder.Services.AddScoped<IFilePathFactory, FilePathFactory>();
 
             builder.Services.AddAutoMapper(config => config.AddProfile<ActorMapper>());
+
             string? mssqlDbName = Environment.GetEnvironmentVariable("MSSQL_DB_NAME");
             string? mssqlUser = Environment.GetEnvironmentVariable("MSSQL_USER");
             string? mssqlPassword = Environment.GetEnvironmentVariable("MSSQL_PASSWORD");

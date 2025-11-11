@@ -8,7 +8,7 @@
         public string? Description { get; set; }
         public string? Name { get; set; }
         public string? OriginalName { get; set; }
-        public string? PathToPoster { get; set; }
+        public string? PosterFileExtension { get; set; }
         public IList<Actor>? Actors { get; set; }
         public IList<Category>? Categories { get; set; }
         public IList<Country>? Countries { get; set; }

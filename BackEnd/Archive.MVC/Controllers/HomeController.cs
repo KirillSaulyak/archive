@@ -1,14 +1,13 @@
 using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.DTOs.Common;
 using Archive.Core.DTOs.MovieSpace.admin.Actor;
-using Archive.Core.Entities.MovieSpace;
-using Archive.Infrastructure;
+using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 using Archive.MVC.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Archive.MVC.Controllers
 {
-    public class HomeController(ILogger<HomeController> logger, IActorService actorService) : Controller
+    public class HomeController(ILogger<HomeController> logger, IMovieService movieService) : Controller
     {
         public IActionResult Index()
         {
@@ -21,14 +20,15 @@ namespace Archive.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(ActorCreateDto actorCreateDto)
+        public async Task<IActionResult> Index(IFormFile formFile)
         {
-            if (!await this.IsValidAsync(actorCreateDto))  // Общая валидация
-            {
-                return View(actorCreateDto);  // Ошибки в view
-            }
-           
-            await actorService.UpdateActorAsync(new ActorUpdateDto( new Guid("e8477632-5f15-4fb0-0eb3-08de11b1431a"),  "cheburek2202"));
+            //await movieService.CreateMovieAsync(new UploadFileDto(formFile.OpenReadStream(),Path.GetExtension(formFile.FileName)));
+            await movieService.DeleteMovieById(new Guid());
+
+            //if (!await this.IsValidAsync(movieService))  // Общая валидация
+            //{
+            //    return View(movieService);  // Ошибки в view
+            //}
             // Сохранение (например, через EF)
             return View();
         }

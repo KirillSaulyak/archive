@@ -5,16 +5,11 @@ using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text; 
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
-namespace Archive.Services.MovieSpace.admin
+namespace Archive.Services.Services.MovieSpace.Admin
 {
-    public class ActorService(ArchiveDbContext archiveDbContext, IMapper actorMapper) : IActorService
+    public class ActorService(ArchiveDbContext archiveDbContext, IMapper actorMapper, IConfiguration configuration) : IActorService
     {
         
         public async Task CreateActorAsync(ActorCreateDto actorCreateDto)
@@ -28,10 +23,12 @@ namespace Archive.Services.MovieSpace.admin
             Actor actor = await archiveDbContext.Actors.AsNoTracking().FirstOrDefaultAsync(actor => actor.Id == id) ?? throw new EntityNotFoundException("Can`t find actor with id: " + id);
             return actorMapper.Map<ActorUpdateDto>(actor); 
         }
+
          
         public async Task UpdateActorAsync(ActorUpdateDto actorUpdateDto)
         {
-            Actor actor = await archiveDbContext.Actors.FindAsync(actorUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update actor. Wrong id: " + actorUpdateDto.Id);
+         string? _pathPoster = configuration["FileStorage:MovieSpase:MoviePosters"];
+        Actor actor = await archiveDbContext.Actors.FindAsync(actorUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update actor. Wrong id: " + actorUpdateDto.Id);
             actorMapper.Map(actorUpdateDto, actor);
             await archiveDbContext.SaveChangesAsync();
         }

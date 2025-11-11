@@ -9,9 +9,9 @@ namespace Archive.Core.DTOs.MovieSpace.Admin.Movie
     public record MovieCreateDto(
         DateOnly? Release,
         int? Duration,
+        string? Description,
         string? Name,
         string? OriginalName,
-        string? PathToPoster,
         IList<Guid>? ActorIds,
         IList<Guid>? CategoryIds,
         IList<Guid>? CountryIds,

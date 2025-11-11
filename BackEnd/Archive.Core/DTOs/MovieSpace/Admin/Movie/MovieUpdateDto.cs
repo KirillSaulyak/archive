@@ -10,6 +10,7 @@ namespace Archive.Core.DTOs.MovieSpace.Admin.Movie
         Guid Id,
         DateOnly? Release,
         int? Duration,
+        string? Description,
         string? Name,
         string? OriginalName,
         string? PathToPoster,

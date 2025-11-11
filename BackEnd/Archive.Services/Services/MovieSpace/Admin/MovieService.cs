@@ -1,26 +1,31 @@
-﻿using Archive.Core.Abstractions.MovieSpace.Services.admin;
+﻿using Archive.Core.Abstractions.Common.Utilities;
+using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.DTOs.Common;
 using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
-using Archive.Core.Mappers.MovieSpace.Admin;
 using Archive.Infrastructure.Persistence;
+using Archive.Services.Abstractions.Factories.MovieSpace;
+using Archive.Services.Enums.MovieSpace;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text; 
-using System.Threading.Tasks;
 
-namespace Archive.Services.MovieSpace.admin
+namespace Archive.Services.Services.MovieSpace.Admin
 {
-    public class MovieService(ArchiveDbContext archiveDbContext, IMapper movieMapper) : IMovieService
+    public class MovieService(ArchiveDbContext archiveDbContext, IMapper movieMapper, IFileManager fileManager, IMovieFilePathFactory movieFilePathFactory) : IMovieService
     {
-        
-        public async Task CreateMovieAsync(MovieCreateDto movieCreateDto)
+        private string PathToPoster { get; } = movieFilePathFactory.GenerateFilePath(MovieFolderType.Posters);
+
+        public async Task CreateMovieAsync(MovieCreateDto movieCreateDto, UploadFileDto uploadFileDto)
         {
-            await archiveDbContext.Movies.AddAsync(movieMapper.Map<Movie>(movieCreateDto));
+            Movie movieForCreate = movieMapper.Map<Movie>(movieCreateDto);
+            movieForCreate.PosterFileExtension = uploadFileDto.FileExtension;
+
+            await archiveDbContext.Movies.AddAsync(movieForCreate);
+
+            await fileManager.SaveFileAsync(uploadFileDto, movieForCreate.Id.ToString(), PathToPoster);
+
+            
             await archiveDbContext.SaveChangesAsync();
         }
 
@@ -37,10 +42,10 @@ namespace Archive.Services.MovieSpace.admin
                 .Include(movie => movie.Translators)
                 .FirstOrDefaultAsync(movie => movie.Id == id) ?? throw new EntityNotFoundException("Can`t find movie with id: " + id);
 
-            return movieMapper.Map<MovieUpdateDto>(movie); 
+            return movieMapper.Map<MovieUpdateDto>(movie);
         }
-         
-        public async Task UpdateMovieAsync(MovieUpdateDto movieUpdateDto)
+
+        public async Task UpdateMovieAsync(MovieUpdateDto movieUpdateDto, UploadFileDto? uploadFileDto)
         {
             Movie movie = await archiveDbContext.Movies
                 .Include(movie => movie.Actors)
@@ -51,14 +56,23 @@ namespace Archive.Services.MovieSpace.admin
                 .Include(movie => movie.Themes)
                 .Include(movie => movie.Translators)
                 .FirstOrDefaultAsync(movie => movie.Id == movieUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update movie. Wrong id: " + movieUpdateDto.Id);
-            
+
             movieMapper.Map(movieUpdateDto, movie);
+
+            if (uploadFileDto != null)
+            {
+                movie.PosterFileExtension = uploadFileDto.FileExtension;
+                await fileManager.SaveFileAsync(uploadFileDto, movie.Id.ToString(), PathToPoster);
+            }
             await archiveDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteMovieById(Guid id)
         {
             Movie movieForDelete = await archiveDbContext.Movies.FindAsync(id) ?? throw new EntityNotFoundException("Can`t delete movie. Wrong id: " + id);
+            string pathToDeletePoster = Path.Combine(PathToPoster, movieForDelete.Id.ToString() + movieForDelete.PosterFileExtension);
+            await fileManager.DeleteFileAsync(pathToDeletePoster);
+
             archiveDbContext.Movies.Remove(movieForDelete);
             await archiveDbContext.SaveChangesAsync();
         }
