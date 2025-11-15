@@ -1,10 +1,5 @@
 ﻿using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Archive.Core.Validators.MovieSpace.Movie
 {
@@ -22,7 +17,7 @@ namespace Archive.Core.Validators.MovieSpace.Movie
                 .MaximumLength(200).WithMessage("Название не может превышать 200 символов");
             RuleFor(dto => dto.OriginalName)
                 .MaximumLength(200).WithMessage("Оригинальное название не может превышать 200 символов");
-            
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class DirectorService(ArchiveDbContext archiveDbContext, IMapper directorMapper) : IDirectorService
     {
-        
+
         public async Task CreateDirectorAsync(DirectorCreateDto directorCreateDto)
         {
             await archiveDbContext.Directors.AddAsync(directorMapper.Map<Director>(directorCreateDto));
@@ -20,9 +20,9 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<DirectorUpdateDto> GetDirectorByIdForUpdateAsync(Guid id)
         {
             Director director = await archiveDbContext.Directors.AsNoTracking().FirstOrDefaultAsync(director => director.Id == id) ?? throw new EntityNotFoundException("Can`t find director with id: " + id);
-            return directorMapper.Map<DirectorUpdateDto>(director); 
+            return directorMapper.Map<DirectorUpdateDto>(director);
         }
-         
+
         public async Task UpdateDirectorAsync(DirectorUpdateDto directorUpdateDto)
         {
             Director director = await archiveDbContext.Directors.FindAsync(directorUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update director. Wrong id: " + directorUpdateDto.Id);

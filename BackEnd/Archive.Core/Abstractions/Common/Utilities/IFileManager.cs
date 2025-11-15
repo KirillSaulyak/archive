@@ -4,7 +4,7 @@ namespace Archive.Core.Abstractions.Common.Utilities
 {
     public interface IFileManager
     {
-        public Task SaveFileAsync(UploadFileDto uploadFileDto, string newFileName, string generatedFilePath);
+        public Task SaveFileAsync(UploadFileDto uploadFileDto, string newFileName, string generatedDirectoryPath);
         public Task DeleteFileAsync(string filePath);
     }
 }

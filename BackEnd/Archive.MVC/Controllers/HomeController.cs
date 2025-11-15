@@ -11,6 +11,7 @@ namespace Archive.MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.ErrorMessage = TempData["ErrorMessage"] ?? "ошибки нет";
             return View();
         }
 
@@ -20,8 +21,11 @@ namespace Archive.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(IFormFile formFile)
+        public async Task<IActionResult> Index(IFormFile formFile, string test = "testParam")
         {
+          
+               
+       
             //await movieService.CreateMovieAsync(new UploadFileDto(formFile.OpenReadStream(),Path.GetExtension(formFile.FileName)));
             await movieService.DeleteMovieById(new Guid());
 

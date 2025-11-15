@@ -10,7 +10,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class CountryService(ArchiveDbContext archiveDbContext, IMapper countryMapper) : ICountryService
     {
-        
+
         public async Task CreateCountryAsync(CountryCreateDto countryCreateDto)
         {
             await archiveDbContext.Countries.AddAsync(countryMapper.Map<Country>(countryCreateDto));
@@ -20,9 +20,9 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<CountryUpdateDto> GetCountryByIdForUpdateAsync(Guid id)
         {
             Country country = await archiveDbContext.Countries.AsNoTracking().FirstOrDefaultAsync(country => country.Id == id) ?? throw new EntityNotFoundException("Can`t find country with id: " + id);
-            return countryMapper.Map<CountryUpdateDto>(country); 
+            return countryMapper.Map<CountryUpdateDto>(country);
         }
-         
+
         public async Task UpdateCountryAsync(CountryUpdateDto countryUpdateDto)
         {
             Country country = await archiveDbContext.Countries.FindAsync(countryUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update country. Wrong id: " + countryUpdateDto.Id);

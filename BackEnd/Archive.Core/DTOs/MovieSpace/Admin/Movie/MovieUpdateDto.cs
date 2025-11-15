@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Archive.Core.DTOs.MovieSpace.Admin.Movie
+﻿namespace Archive.Core.DTOs.MovieSpace.Admin.Movie
 {
     public record MovieUpdateDto(
         Guid Id,

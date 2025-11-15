@@ -10,7 +10,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class TranslatorService(ArchiveDbContext archiveDbContext, IMapper translatorMapper) : ITranslatorService
     {
-        
+
         public async Task CreateTranslatorAsync(TranslatorCreateDto translatorCreateDto)
         {
             await archiveDbContext.Translators.AddAsync(translatorMapper.Map<Translator>(translatorCreateDto));
@@ -20,9 +20,9 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<TranslatorUpdateDto> GetTranslatorByIdForUpdateAsync(Guid id)
         {
             Translator translator = await archiveDbContext.Translators.AsNoTracking().FirstOrDefaultAsync(translator => translator.Id == id) ?? throw new EntityNotFoundException("Can`t find translator with id: " + id);
-            return translatorMapper.Map<TranslatorUpdateDto>(translator); 
+            return translatorMapper.Map<TranslatorUpdateDto>(translator);
         }
-         
+
         public async Task UpdateTranslatorAsync(TranslatorUpdateDto translatorUpdateDto)
         {
             Translator translator = await archiveDbContext.Translators.FindAsync(translatorUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update translator. Wrong id: " + translatorUpdateDto.Id);

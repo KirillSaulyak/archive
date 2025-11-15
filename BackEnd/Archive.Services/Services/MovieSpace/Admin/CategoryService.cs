@@ -10,7 +10,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class CategoryService(ArchiveDbContext archiveDbContext, IMapper categoryMapper) : ICategoryService
     {
-        
+
         public async Task CreateCategoryAsync(CategoryCreateDto categoryCreateDto)
         {
             await archiveDbContext.Categories.AddAsync(categoryMapper.Map<Category>(categoryCreateDto));
@@ -20,9 +20,9 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<CategoryUpdateDto> GetCategoryByIdForUpdateAsync(Guid id)
         {
             Category category = await archiveDbContext.Categories.AsNoTracking().FirstOrDefaultAsync(category => category.Id == id) ?? throw new EntityNotFoundException("Can`t find category with id: " + id);
-            return categoryMapper.Map<CategoryUpdateDto>(category); 
+            return categoryMapper.Map<CategoryUpdateDto>(category);
         }
-         
+
         public async Task UpdateCategoryAsync(CategoryUpdateDto categoryUpdateDto)
         {
             Category category = await archiveDbContext.Categories.FindAsync(categoryUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update category. Wrong id: " + categoryUpdateDto.Id);

@@ -7,8 +7,12 @@
 <div class="text-center">
     <form asp-action="Index" method="post" enctype="multipart/form-data">
      
-        
+        <input type="text" name="test" />
         <input type="file" name="formFile" />
         <button type="submit">Загрузить</button>
     </form>
+    <h2>Произошла ошибка</h2>
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
 </div>

@@ -8,6 +8,7 @@ namespace Archive.Core.Abstractions.MovieSpace.Services.admin
         Task CreateMovieAsync(MovieCreateDto movieCreateDto, UploadFileDto uploadFileDto);
         Task<MovieUpdateDto> GetMovieByIdForUpdateAsync(Guid id);
         Task UpdateMovieAsync(MovieUpdateDto movieUpdateDto, UploadFileDto? uploadFileDto);
+
         Task DeleteMovieById(Guid id);
     }
 }

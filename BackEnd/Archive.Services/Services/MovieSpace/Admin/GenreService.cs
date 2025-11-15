@@ -10,7 +10,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class GenreService(ArchiveDbContext archiveDbContext, IMapper genreMapper) : IGenreService
     {
-        
+
         public async Task CreateGenreAsync(GenreCreateDto genreCreateDto)
         {
             await archiveDbContext.Genres.AddAsync(genreMapper.Map<Genre>(genreCreateDto));
@@ -20,9 +20,9 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<GenreUpdateDto> GetGenreByIdForUpdateAsync(Guid id)
         {
             Genre genre = await archiveDbContext.Genres.AsNoTracking().FirstOrDefaultAsync(genre => genre.Id == id) ?? throw new EntityNotFoundException("Can`t find genre with id: " + id);
-            return genreMapper.Map<GenreUpdateDto>(genre); 
+            return genreMapper.Map<GenreUpdateDto>(genre);
         }
-         
+
         public async Task UpdateGenreAsync(GenreUpdateDto genreUpdateDto)
         {
             Genre genre = await archiveDbContext.Genres.FindAsync(genreUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update genre. Wrong id: " + genreUpdateDto.Id);

@@ -25,7 +25,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 
             await fileManager.SaveFileAsync(uploadFileDto, movieForCreate.Id.ToString(), PathToPoster);
 
-            
+
             await archiveDbContext.SaveChangesAsync();
         }
 

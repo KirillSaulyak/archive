@@ -11,7 +11,6 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class ActorService(ArchiveDbContext archiveDbContext, IMapper actorMapper, IConfiguration configuration) : IActorService
     {
-        
         public async Task CreateActorAsync(ActorCreateDto actorCreateDto)
         {
             await archiveDbContext.Actors.AddAsync(actorMapper.Map<Actor>(actorCreateDto));
@@ -21,14 +20,13 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<ActorUpdateDto> GetActorByIdForUpdateAsync(Guid id)
         {
             Actor actor = await archiveDbContext.Actors.AsNoTracking().FirstOrDefaultAsync(actor => actor.Id == id) ?? throw new EntityNotFoundException("Can`t find actor with id: " + id);
-            return actorMapper.Map<ActorUpdateDto>(actor); 
+            return actorMapper.Map<ActorUpdateDto>(actor);
         }
 
-         
+
         public async Task UpdateActorAsync(ActorUpdateDto actorUpdateDto)
         {
-         string? _pathPoster = configuration["FileStorage:MovieSpase:MoviePosters"];
-        Actor actor = await archiveDbContext.Actors.FindAsync(actorUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update actor. Wrong id: " + actorUpdateDto.Id);
+            Actor actor = await archiveDbContext.Actors.FindAsync(actorUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update actor. Wrong id: " + actorUpdateDto.Id);
             actorMapper.Map(actorUpdateDto, actor);
             await archiveDbContext.SaveChangesAsync();
         }

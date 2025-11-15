@@ -1,11 +1,5 @@
 using Archive.Core.DTOs.MovieSpace.admin.Translator;
-using Archive.Core.Entities.MovieSpace;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Archive.Core.Validators.MovieSpace.Translator
 {

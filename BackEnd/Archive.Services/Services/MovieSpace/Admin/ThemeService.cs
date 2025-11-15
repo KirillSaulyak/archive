@@ -10,7 +10,7 @@ namespace Archive.Services.Services.MovieSpace.Admin
 {
     public class ThemeService(ArchiveDbContext archiveDbContext, IMapper themeMapper) : IThemeService
     {
-        
+
         public async Task CreateThemeAsync(ThemeCreateDto themeCreateDto)
         {
             await archiveDbContext.Themes.AddAsync(themeMapper.Map<Theme>(themeCreateDto));
@@ -20,9 +20,9 @@ namespace Archive.Services.Services.MovieSpace.Admin
         public async Task<ThemeUpdateDto> GetThemeByIdForUpdateAsync(Guid id)
         {
             Theme theme = await archiveDbContext.Themes.AsNoTracking().FirstOrDefaultAsync(theme => theme.Id == id) ?? throw new EntityNotFoundException("Can`t find theme with id: " + id);
-            return themeMapper.Map<ThemeUpdateDto>(theme); 
+            return themeMapper.Map<ThemeUpdateDto>(theme);
         }
-         
+
         public async Task UpdateThemeAsync(ThemeUpdateDto themeUpdateDto)
         {
             Theme theme = await archiveDbContext.Themes.FindAsync(themeUpdateDto.Id) ?? throw new EntityNotFoundException("Can`t update theme. Wrong id: " + themeUpdateDto.Id);
