@@ -1,5 +1,5 @@
 ﻿using Archive.Core.Abstractions.Common.Utilities;
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
 using Archive.Core.DTOs.Common;
 using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 using Archive.Core.Entities.MovieSpace;
@@ -12,7 +12,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Archive.Services.Services.MovieSpace.Admin
 {
-    public class MovieService(ArchiveDbContext archiveDbContext, IMapper movieMapper, IFileManager fileManager, IMovieFilePathFactory movieFilePathFactory) : IMovieService
+    public class MovieService(
+        ArchiveDbContext archiveDbContext,
+        IMapper movieMapper,
+        IFileManager fileManager,
+        IMovieFilePathFactory movieFilePathFactory,
+        IActorService actorService,
+        ICategoryService categoryService,
+        ICountryService countryService,
+        IDirectorService directorService,
+        IGenreService genreService,
+        IThemeService themeService,
+        ITranslatorService translatorService) : IMovieService
     {
         private string PathToPoster { get; } = movieFilePathFactory.GenerateFilePath(MovieFolderType.Posters);
 
@@ -20,12 +31,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             Movie movieForCreate = movieMapper.Map<Movie>(movieCreateDto);
             movieForCreate.PosterFileExtension = uploadFileDto.FileExtension;
+            movieForCreate.Actors= await actorService.FindAllActorByIdsTrackingAsync(movieCreateDto.ActorIds);
+            movieForCreate.Categories = await categoryService.FindAllCategoryByIdsTrackingAsync(movieCreateDto.CategoryIds);
+            movieForCreate.Countries = await countryService.FindAllCountryByIdsTrackingAsync(movieCreateDto.CountryIds);
+            movieForCreate.Directors = await directorService.FindAllDirectorByIdsTrackingAsync(movieCreateDto.DirectorIds);
+            movieForCreate.Genres = await genreService.FindAllGenreByIdsTrackingAsync(movieCreateDto.GenreIds);
+            movieForCreate.Themes = await themeService.FindAllThemeByIdsTrackingAsync(movieCreateDto.ThemeIds);
+            movieForCreate.Translators = await translatorService.FindAllTranslatorByIdsTrackingAsync(movieCreateDto.TranslatorIds);
 
             await archiveDbContext.Movies.AddAsync(movieForCreate);
 
             await fileManager.SaveFileAsync(uploadFileDto, movieForCreate.Id.ToString(), PathToPoster);
-
-
             await archiveDbContext.SaveChangesAsync();
         }
 

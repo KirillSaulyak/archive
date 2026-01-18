@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Country;
+using Archive.Core.DTOs.MovieSpace.Admin.Country;
 using FluentValidation;
 
 namespace Archive.Core.Validators.MovieSpace.Country

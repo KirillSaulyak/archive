@@ -1,0 +1,25 @@
+﻿@model Archive.Core.DTOs.MovieSpace.Admin.Translator.TranslatorCreateDto
+
+<form asp-action="Create" asp-controller="Translator" method="post">
+    <div class="modal fade modal-sm" id="translatorCreateModal" tabindex="-1" aria-labelledby="translatorCreateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="translatorCreateModalLabel">Создать нового переводчика</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body col">
+                    <div class="row mb-4 justify-content-center">
+                        <div class="col">
+                            <input asp-for="FullName" type="text" class="form-control" placeholder="Фамилия и имя переводчика">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

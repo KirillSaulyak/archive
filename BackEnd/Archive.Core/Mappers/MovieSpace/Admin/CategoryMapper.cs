@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Category;
+using Archive.Core.DTOs.MovieSpace.Admin.Category;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 
@@ -9,6 +9,8 @@ namespace Archive.Core.Mappers.MovieSpace.Admin
         public CategoryMapper()
         {
             CreateMap<CategoryCreateDto, Category>();
+
+            CreateMap<Category, CategoryInfoShortDto>();
 
             CreateMap<Category, CategoryUpdateDto>()
                 .ReverseMap()

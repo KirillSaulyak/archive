@@ -1,5 +1,5 @@
 using Archive.Core.Abstractions.Common.Utilities;
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
 using Archive.Core.Mappers.MovieSpace.Admin;
 using Archive.Core.Validators.MovieSpace.Actor;
 using Archive.Infrastructure.Persistence;
@@ -13,8 +13,10 @@ using DotNetEnv;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Archive.MVC
 {
@@ -28,6 +30,7 @@ namespace Archive.MVC
 
             builder.Services.AddControllersWithViews();
 
+            //Database
             const string envDbName = "MSSQL_DB_NAME";
             const string envDbUser = "MSSQL_USER";
             const string envDbPassword = "MSSQL_PASSWORD";
@@ -40,17 +43,40 @@ namespace Archive.MVC
             builder.Configuration[defaultConnectionDb] = mssqlConnectionString;
             builder.Services.AddDbContext<ArchiveDbContext>(options => options.UseSqlServer(builder.Configuration[defaultConnectionDb]));
 
+            //Validators
             builder.Services.AddValidatorsFromAssemblyContaining<ActorCreateDtoValidator>();
 
+            //Factories
             builder.Services.AddScoped<IMovieFilePathFactory, MovieFilePathFactory>();
             builder.Services.AddScoped<IFilePathFactory, FilePathFactory>();
+
+            //Utilities
             builder.Services.AddScoped<IFileManager, FileManager>();
-            //builder.Services.AddScoped<IActorService, ActorService>();
+            
+            //Services
+            builder.Services.AddScoped<IActorService, ActorService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICountryService, CountryService>();
+            builder.Services.AddScoped<IDirectorService, DirectorService>();
+            builder.Services.AddScoped<IGenreService, GenreService>();
             builder.Services.AddScoped<IMovieService, MovieService>();
+            builder.Services.AddScoped<IThemeService, ThemeService>();
+            builder.Services.AddScoped<ITranslatorService, TranslatorService>();
+            
+            //Mappers
+            builder.Services.AddAutoMapper(config =>
+            {
+                config.AddProfile<ActorMapper>();
+                config.AddProfile<CategoryMapper>();
+                config.AddProfile<CountryMapper>();
+                config.AddProfile<DirectorMapper>();
+                config.AddProfile<GenreMapper>();
+                config.AddProfile<MovieMapper>();
+                config.AddProfile<ThemeMapper>();
+                config.AddProfile<TranslatorMapper>();
+            });
 
-            builder.Services.AddAutoMapper(config => config.AddProfile<ActorMapper>());
-
-            //����� �������� �������� ������ � ������ ��� SQL Server: AddSqlServerCache()
+            //Для распределенного кэша в памяти, для SQL Server: AddSqlServerCache()
             builder.Services.AddDistributedMemoryCache();
 
             builder.Services.AddSession(options =>
@@ -63,6 +89,13 @@ namespace Archive.MVC
                 options.Cookie.SameSite = SameSiteMode.Strict;
             });
 
+            //Для того, чтобы пути в области MVC правильно работали для области MovieSpace
+            //builder.Services.Configure<RazorViewEngineOptions>(options =>
+            //{
+            //    options.AreaViewLocationFormats.Add("/Areas/Views/{2}/Movie/{1}/{0}.cshtml");
+            //    //options.ViewLocationFormats.Add("Views/Movie/{1}/{0}.cshtml");
+            //});
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -72,12 +105,12 @@ namespace Archive.MVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             app.UseSession();
 
             app.UseExceptionHandler(errorApp =>
             {
-                
+
                 errorApp.Run(async context =>
                 {
                     var tempDataFactory = context.RequestServices.GetRequiredService<ITempDataDictionaryFactory>();
@@ -91,10 +124,10 @@ namespace Archive.MVC
                                                $" Request: {context.Request.Method}" +
                                                $" Request path: {context.Request.Path}");
 
-                    tempData["ErrorMessage"] = exception.Message; 
+                    tempData["ErrorMessage"] = exception.Message;
                     tempData.Save();
 
-                    context.Response.Redirect($"Home");
+                    context.Response.Redirect($"Error");
                 });
             });
 
@@ -103,6 +136,10 @@ namespace Archive.MVC
             app.UseAuthorization();
 
             app.MapStaticAssets();
+            app.MapControllers();
+            app.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Movie}/{action=Create}/{id?}");
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")

@@ -1,4 +1,4 @@
-﻿namespace Archive.Core.DTOs.MovieSpace.admin.Actor
+﻿namespace Archive.Core.DTOs.MovieSpace.Admin.Actor
 {
     public record ActorCreateDto(string? FullName);
 }

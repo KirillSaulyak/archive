@@ -1,6 +1,6 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
 using Archive.Core.DTOs.Common;
-using Archive.Core.DTOs.MovieSpace.admin.Actor;
+using Archive.Core.DTOs.MovieSpace.Admin.Actor;
 using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 using Archive.MVC.Extensions;
 using Microsoft.AspNetCore.Mvc;

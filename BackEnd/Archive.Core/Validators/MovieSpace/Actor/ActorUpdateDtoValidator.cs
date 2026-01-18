@@ -1,4 +1,4 @@
-﻿using Archive.Core.DTOs.MovieSpace.admin.Actor;
+﻿using Archive.Core.DTOs.MovieSpace.Admin.Actor;
 using FluentValidation;
 
 namespace Archive.Core.Validators.MovieSpace.Actor

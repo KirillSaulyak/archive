@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Genre;
+using Archive.Core.DTOs.MovieSpace.Admin.Genre;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 
@@ -9,6 +9,8 @@ namespace Archive.Core.Mappers.MovieSpace.Admin
         public GenreMapper()
         {
             CreateMap<GenreCreateDto, Genre>();
+
+            CreateMap<Genre, GenreInfoShortDto>();
 
             CreateMap<Genre, GenreUpdateDto>()
                 .ReverseMap()

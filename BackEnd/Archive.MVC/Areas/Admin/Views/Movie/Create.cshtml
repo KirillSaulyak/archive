@@ -1,0 +1,155 @@
+﻿@using Archive.Movie.MVC.Areas.Admin.ViewModels
+@using Archive.Core.DTOs.MovieSpace.Admin.Actor
+@using Archive.Core.DTOs.MovieSpace.Admin.Category
+@using Archive.Core.DTOs.MovieSpace.Admin.Country
+@using Archive.Core.DTOs.MovieSpace.Admin.Director
+@using Archive.Core.DTOs.MovieSpace.Admin.Genre
+@using Archive.Core.DTOs.MovieSpace.Admin.Theme
+@using Archive.Core.DTOs.MovieSpace.Admin.Translator
+@using Archive.Core.DTOs.MovieSpace.Admin.Movie
+@using Microsoft.AspNetCore.Mvc.Rendering
+@model MovieCreateViewModel
+
+
+<div class="row mb-4 justify-content-center">
+    <div class="col-4">
+        <h1>Добавление кино</h1>
+    </div>
+</div>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="row mb-4 justify-content-center">
+        <div class="col-3">
+            <input asp-for="MovieCreateDto.Name" type="text" class="form-control" placeholder="Название">
+        </div>
+        <div class="col-3">
+            <input asp-for="MovieCreateDto.OriginalName" type="text" class="form-control" placeholder="Иностранное название">
+        </div>
+        <div class="col-3">
+            <input asp-for="MovieCreateDto.Duration" type="number" class="form-control" placeholder="Длительность">
+        </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-3">
+            <input type="date" asp-for="MovieCreateDto.Release" class="form-control" placeholder="Дата выхода">
+        </div>
+        <div class="col-3">
+            <select class="form-select" aria-label="Тип кино" asp-for="MovieCreateDto.CategoryIds" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                <option selected disabled>Тип кино</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#categoryCreateModal">Создать новый тип</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <select class="form-select" aria-label="Страна" asp-for="MovieCreateDto.CountryIds" asp-items="@(new SelectList(Model.Countries, "Id", "Name"))">
+                <option selected disabled>Страна</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#countryCreateModal">Создать новую страну</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-3">
+            <select class="form-select" aria-label="Жанры" asp-for="MovieCreateDto.GenreIds" asp-items="@(new SelectList(Model.Genres, "Id", "Name"))">
+                <option selected disabled>Жанры</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#genreCreateModal">Создать новый жанр</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <select class="form-select" aria-label="Переводчик" asp-for="MovieCreateDto.TranslatorIds" asp-items="@(new SelectList(Model.Translators, "Id", "FullName"))">
+                <option selected disabled>Переводчик</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#translatorCreateModal">Создать нового переводчика</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <select class="form-select" aria-label="Темы" asp-for="MovieCreateDto.ThemeIds" asp-items="@(new SelectList(Model.Themes, "Id", "Name"))">
+                <option selected disabled>Темы</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#themeCreateModal">Создать новую тему</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4 justify-content-center">
+        <div class="col-3">
+            <select class="form-select" aria-label="Режиссер" asp-for="MovieCreateDto.DirectorIds" asp-items="@(new SelectList(Model.Directors, "Id", "FullName"))">
+                <option selected disabled>Режиссер</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#directorCreateModal">Создать нового режиссера</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <select class="form-select" aria-label="Главные роли" asp-for="MovieCreateDto.ActorIds" asp-items="@(new SelectList(Model.Actors, "Id", "FullName"))">
+                <option selected disabled>Главные роли</option>
+            </select>
+            <div class="row mt-2">
+                <div class="col">
+                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#actorCreateModal">Создать нового актера</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4 justify-content-center">
+        <div class="col-2 d-flex align-items-center">
+            <button type="button" class="btn btn-secondary" id="buttonUploadPoster">Добавить постер</button>
+            <input asp-for="Poster" class="form-control" type="file" id="inputPoster" accept="image/*" hidden />
+        </div>
+        <div class="col-1">
+            <img id="previewPoster" src="/images/DefaultMoviePoster.jpeg" alt="Превью" style="max-width: 150px;max-height: 180px;" />
+        </div>
+    </div>
+
+    <div class="row mb-4 justify-content-center">
+        <div class="col-9">
+            <textarea asp-for="MovieCreateDto.Description" class="form-control" id="Description" placeholder="Описание" rows="3"></textarea>
+        </div>
+    </div>
+
+    <div class="row mb-4 justify-content-center">
+        <div class="col-2">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </div>
+    </div>
+</form>
+
+@await Html.PartialAsync("../Actor/_ModalCreate.cshtml", new ActorCreateDto(null))
+@await Html.PartialAsync("../Category/_ModalCreate.cshtml", new CategoryCreateDto(null))
+@await Html.PartialAsync("../Country/_ModalCreate.cshtml", new CountryCreateDto(null))
+@await Html.PartialAsync("../Director/_ModalCreate.cshtml", new DirectorCreateDto(null))
+@await Html.PartialAsync("../Genre/_ModalCreate.cshtml", new GenreCreateDto(null))
+@await Html.PartialAsync("../Theme/_ModalCreate.cshtml", new ThemeCreateDto(null))
+@await Html.PartialAsync("../Translator/_ModalCreate.cshtml", new TranslatorCreateDto(null))
+
+
+@section Scripts {
+    <script src="/js/PreviewImage.js"></script>
+    <script src="/js/ButtonInsteadOfInputFile.js"></script>
+    <script>
+        buttonInsteadOfInputFile('buttonUploadPoster','inputPoster');
+        previewImage('inputPoster', 'previewPoster');
+    </script>
+}

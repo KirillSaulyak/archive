@@ -1,5 +1,5 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Genre;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Genre;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -15,6 +15,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             await archiveDbContext.Genres.AddAsync(genreMapper.Map<Genre>(genreCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<GenreInfoShortDto>> findAllGenreInfoShortDtos()
+        {
+            IList<Genre> genres = await archiveDbContext.Genres.AsNoTracking().ToListAsync();
+            return genreMapper.Map<IList<GenreInfoShortDto>>(genres);
+        }
+
+        public async Task<IList<Genre>> FindAllGenreByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Genres.Where(genre => ids.Contains(genre.Id)).ToListAsync();
         }
 
         public async Task<GenreUpdateDto> GetGenreByIdForUpdateAsync(Guid id)

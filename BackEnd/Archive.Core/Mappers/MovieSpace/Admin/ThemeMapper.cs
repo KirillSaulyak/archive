@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Theme;
+using Archive.Core.DTOs.MovieSpace.Admin.Theme;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 
@@ -9,6 +9,8 @@ namespace Archive.Core.Mappers.MovieSpace.Admin
         public ThemeMapper()
         {
             CreateMap<ThemeCreateDto, Theme>();
+
+            CreateMap<Theme, ThemeInfoShortDto>();
 
             CreateMap<Theme, ThemeUpdateDto>()
                 .ReverseMap()

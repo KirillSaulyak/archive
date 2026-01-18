@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Translator;
+using Archive.Core.DTOs.MovieSpace.Admin.Translator;
 using FluentValidation;
 
 namespace Archive.Core.Validators.MovieSpace.Translator

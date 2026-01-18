@@ -1,5 +1,5 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Category;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Category;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -15,6 +15,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             await archiveDbContext.Categories.AddAsync(categoryMapper.Map<Category>(categoryCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<CategoryInfoShortDto>> findAllCategoryInfoShortDtos()
+        {
+            IList<Category> categories = await archiveDbContext.Categories.AsNoTracking().ToListAsync();
+            return categoryMapper.Map<IList<CategoryInfoShortDto>>(categories);
+        }
+
+        public async Task<IList<Category>> FindAllCategoryByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Categories.Where(category => ids.Contains(category.Id)).ToListAsync();
         }
 
         public async Task<CategoryUpdateDto> GetCategoryByIdForUpdateAsync(Guid id)

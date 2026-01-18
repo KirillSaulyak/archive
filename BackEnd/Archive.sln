@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36511.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archive.MVC", "Archive.MVC\Archive.MVC.csproj", "{3C681049-0EDA-444C-A0D1-18FA959029D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Archive.Movie.MVC", "Archive.MVC\Archive.Movie.MVC.csproj", "{3C681049-0EDA-444C-A0D1-18FA959029D3}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject

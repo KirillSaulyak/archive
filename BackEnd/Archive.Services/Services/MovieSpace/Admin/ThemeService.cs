@@ -1,5 +1,5 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Theme;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Theme;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -15,6 +15,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             await archiveDbContext.Themes.AddAsync(themeMapper.Map<Theme>(themeCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<ThemeInfoShortDto>> findAllThemeInfoShortDtos()
+        {
+            IList<Theme> themes = await archiveDbContext.Themes.AsNoTracking().ToListAsync();
+            return themeMapper.Map<IList<ThemeInfoShortDto>>(themes);
+        }
+
+        public async Task<IList<Theme>> FindAllThemeByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Themes.Where(theme => ids.Contains(theme.Id)).ToListAsync();
         }
 
         public async Task<ThemeUpdateDto> GetThemeByIdForUpdateAsync(Guid id)

@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Theme;
+using Archive.Core.DTOs.MovieSpace.Admin.Theme;
 using FluentValidation;
 
 namespace Archive.Core.Validators.MovieSpace.Theme

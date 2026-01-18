@@ -1,5 +1,5 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Translator;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Translator;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -15,6 +15,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             await archiveDbContext.Translators.AddAsync(translatorMapper.Map<Translator>(translatorCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<TranslatorInfoShortDto>> findAllTranslatorInfoShortDtos()
+        {
+            IList<Translator> translators = await archiveDbContext.Translators.AsNoTracking().ToListAsync();
+            return translatorMapper.Map<IList<TranslatorInfoShortDto>>(translators);
+        }
+
+        public async Task<IList<Translator>> FindAllTranslatorByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Translators.Where(translator => ids.Contains(translator.Id)).ToListAsync();
         }
 
         public async Task<TranslatorUpdateDto> GetTranslatorByIdForUpdateAsync(Guid id)

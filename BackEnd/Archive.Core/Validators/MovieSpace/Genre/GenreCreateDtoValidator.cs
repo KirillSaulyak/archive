@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Genre;
+using Archive.Core.DTOs.MovieSpace.Admin.Genre;
 using FluentValidation;
 
 namespace Archive.Core.Validators.MovieSpace.Genre

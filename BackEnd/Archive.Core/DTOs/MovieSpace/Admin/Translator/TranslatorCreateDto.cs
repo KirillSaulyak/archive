@@ -1,4 +1,4 @@
-namespace Archive.Core.DTOs.MovieSpace.admin.Translator
+namespace Archive.Core.DTOs.MovieSpace.Admin.Translator
 {
     public record TranslatorCreateDto(string? FullName);
 }

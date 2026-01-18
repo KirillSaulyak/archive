@@ -1,5 +1,5 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Country;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Country;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -15,6 +15,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             await archiveDbContext.Countries.AddAsync(countryMapper.Map<Country>(countryCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<CountryInfoShortDto>> findAllCountryInfoShortDtos()
+        {
+            IList<Country> countries = await archiveDbContext.Countries.AsNoTracking().ToListAsync();
+            return countryMapper.Map<IList<CountryInfoShortDto>>(countries);
+        }
+
+        public async Task<IList<Country>> FindAllCountryByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Countries.Where(country => ids.Contains(country.Id)).ToListAsync();
         }
 
         public async Task<CountryUpdateDto> GetCountryByIdForUpdateAsync(Guid id)

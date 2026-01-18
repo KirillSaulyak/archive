@@ -1,5 +1,5 @@
-﻿using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Actor;
+﻿using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Actor;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -9,12 +9,22 @@ using Microsoft.Extensions.Configuration;
 
 namespace Archive.Services.Services.MovieSpace.Admin
 {
-    public class ActorService(ArchiveDbContext archiveDbContext, IMapper actorMapper, IConfiguration configuration) : IActorService
+    public class ActorService(ArchiveDbContext archiveDbContext, IMapper actorMapper) : IActorService
     {
         public async Task CreateActorAsync(ActorCreateDto actorCreateDto)
         {
             await archiveDbContext.Actors.AddAsync(actorMapper.Map<Actor>(actorCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+        public async Task<IList<ActorInfoShortDto>> findAllActorInfoShortDtos()
+        {
+            IList<Actor> actors = await archiveDbContext.Actors.AsNoTracking().ToListAsync();
+            return actorMapper.Map<IList<ActorInfoShortDto>>(actors);
+        }
+
+        public async Task<IList<Actor>> FindAllActorByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Actors.Where(actor => ids.Contains(actor.Id)).ToListAsync();
         }
 
         public async Task<ActorUpdateDto> GetActorByIdForUpdateAsync(Guid id)
@@ -22,7 +32,6 @@ namespace Archive.Services.Services.MovieSpace.Admin
             Actor actor = await archiveDbContext.Actors.AsNoTracking().FirstOrDefaultAsync(actor => actor.Id == id) ?? throw new EntityNotFoundException("Can`t find actor with id: " + id);
             return actorMapper.Map<ActorUpdateDto>(actor);
         }
-
 
         public async Task UpdateActorAsync(ActorUpdateDto actorUpdateDto)
         {

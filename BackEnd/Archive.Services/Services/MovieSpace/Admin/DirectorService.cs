@@ -1,5 +1,5 @@
-using Archive.Core.Abstractions.MovieSpace.Services.admin;
-using Archive.Core.DTOs.MovieSpace.admin.Director;
+using Archive.Core.Abstractions.MovieSpace.Services.Admin;
+using Archive.Core.DTOs.MovieSpace.Admin.Director;
 using Archive.Core.Entities.MovieSpace;
 using Archive.Core.Exceptions;
 using Archive.Infrastructure.Persistence;
@@ -15,6 +15,17 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             await archiveDbContext.Directors.AddAsync(directorMapper.Map<Director>(directorCreateDto));
             await archiveDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<DirectorInfoShortDto>> findAllDirectorInfoShortDtos()
+        {
+            IList<Director> directors = await archiveDbContext.Directors.AsNoTracking().ToListAsync();
+            return directorMapper.Map<IList<DirectorInfoShortDto>>(directors);
+        }
+
+        public async Task<IList<Director>> FindAllDirectorByIdsTrackingAsync(IList<Guid> ids)
+        {
+            return await archiveDbContext.Directors.Where(director => ids.Contains(director.Id)).ToListAsync();
         }
 
         public async Task<DirectorUpdateDto> GetDirectorByIdForUpdateAsync(Guid id)

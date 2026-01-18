@@ -1,7 +1,7 @@
 ﻿using Archive.Core.DTOs.Common;
 using Archive.Core.DTOs.MovieSpace.Admin.Movie;
 
-namespace Archive.Core.Abstractions.MovieSpace.Services.admin
+namespace Archive.Core.Abstractions.MovieSpace.Services.Admin
 {
     public interface IMovieService
     {

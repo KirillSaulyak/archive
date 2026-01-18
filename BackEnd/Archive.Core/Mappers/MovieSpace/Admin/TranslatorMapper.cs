@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Translator;
+using Archive.Core.DTOs.MovieSpace.Admin.Translator;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 
@@ -9,6 +9,8 @@ namespace Archive.Core.Mappers.MovieSpace.Admin
         public TranslatorMapper()
         {
             CreateMap<TranslatorCreateDto, Translator>();
+
+            CreateMap<Translator, TranslatorInfoShortDto>();
 
             CreateMap<Translator, TranslatorUpdateDto>()
                 .ReverseMap()

@@ -9,13 +9,13 @@ namespace Archive.Core.Mappers.MovieSpace.Admin
         public MovieMapper()
         {
             CreateMap<MovieCreateDto, Movie>()
-                .ForMember(dest => dest.Actors, opt => opt.MapFrom(src => src.ActorIds.Select(id => new Actor { Id = id }).ToList()))
-                .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.CategoryIds.Select(id => new Category { Id = id }).ToList()))
-                .ForMember(dest => dest.Countries, opt => opt.MapFrom(src => src.CountryIds.Select(id => new Country { Id = id }).ToList()))
-                .ForMember(dest => dest.Directors, opt => opt.MapFrom(src => src.DirectorIds.Select(id => new Director { Id = id }).ToList()))
-                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.GenreIds.Select(id => new Genre { Id = id }).ToList()))
-                .ForMember(dest => dest.Themes, opt => opt.MapFrom(src => src.ThemeIds.Select(id => new Theme { Id = id }).ToList()))
-                .ForMember(dest => dest.Translators, opt => opt.MapFrom(src => src.TranslatorIds.Select(id => new Translator { Id = id }).ToList()));
+                .ForMember(dest => dest.Actors, opt => opt.Ignore())
+                .ForMember(dest => dest.Categories, opt => opt.Ignore())
+                .ForMember(dest => dest.Countries, opt => opt.Ignore())
+                .ForMember(dest => dest.Directors, opt => opt.Ignore())
+                .ForMember(dest => dest.Genres, opt => opt.Ignore())
+                .ForMember(dest => dest.Themes, opt => opt.Ignore())
+                .ForMember(dest => dest.Translators, opt => opt.Ignore());
 
             CreateMap<Movie, MovieUpdateDto>()
                 .ForMember(dest => dest.ActorIds,

@@ -1,4 +1,4 @@
-using Archive.Core.DTOs.MovieSpace.admin.Country;
+using Archive.Core.DTOs.MovieSpace.Admin.Country;
 using Archive.Core.Entities.MovieSpace;
 using AutoMapper;
 
@@ -9,6 +9,8 @@ namespace Archive.Core.Mappers.MovieSpace.Admin
         public CountryMapper()
         {
             CreateMap<CountryCreateDto, Country>();
+
+            CreateMap<Country, CountryInfoShortDto>();
 
             CreateMap<Country, CountryUpdateDto>()
                 .ReverseMap()
