@@ -31,17 +31,20 @@ namespace Archive.Services.Services.MovieSpace.Admin
         {
             Movie movieForCreate = movieMapper.Map<Movie>(movieCreateDto);
             movieForCreate.PosterFileExtension = uploadFileDto.FileExtension;
-            movieForCreate.Actors= await actorService.FindAllActorByIdsTrackingAsync(movieCreateDto.ActorIds);
-            movieForCreate.Categories = await categoryService.FindAllCategoryByIdsTrackingAsync(movieCreateDto.CategoryIds);
-            movieForCreate.Countries = await countryService.FindAllCountryByIdsTrackingAsync(movieCreateDto.CountryIds);
-            movieForCreate.Directors = await directorService.FindAllDirectorByIdsTrackingAsync(movieCreateDto.DirectorIds);
-            movieForCreate.Genres = await genreService.FindAllGenreByIdsTrackingAsync(movieCreateDto.GenreIds);
-            movieForCreate.Themes = await themeService.FindAllThemeByIdsTrackingAsync(movieCreateDto.ThemeIds);
-            movieForCreate.Translators = await translatorService.FindAllTranslatorByIdsTrackingAsync(movieCreateDto.TranslatorIds);
+
+            movieForCreate.Categories = movieCreateDto.CategoryIds?.Any() == true ? await categoryService.FindAllCategoryByIdsTrackingAsync(movieCreateDto.CategoryIds) : throw new ArgumentNullException("Category can`t be null");
+
+            movieForCreate.Actors = movieCreateDto.ActorIds?.Any() == true ? await actorService.FindAllActorByIdsTrackingAsync(movieCreateDto.ActorIds) : null;
+            movieForCreate.Countries = movieCreateDto.CountryIds?.Any() == true ? await countryService.FindAllCountryByIdsTrackingAsync(movieCreateDto.CountryIds) : null;
+            movieForCreate.Directors = movieCreateDto.DirectorIds?.Any() == true ? await directorService.FindAllDirectorByIdsTrackingAsync(movieCreateDto.DirectorIds) : null;
+            movieForCreate.Genres = movieCreateDto.GenreIds?.Any() == true ? await genreService.FindAllGenreByIdsTrackingAsync(movieCreateDto.GenreIds) : null;
+            movieForCreate.Themes = movieCreateDto.ThemeIds?.Any() == true ? await themeService.FindAllThemeByIdsTrackingAsync(movieCreateDto.ThemeIds) : null;
+            movieForCreate.Translators = movieCreateDto.TranslatorIds?.Any() == true ? await translatorService.FindAllTranslatorByIdsTrackingAsync(movieCreateDto.TranslatorIds) : null;
 
             await archiveDbContext.Movies.AddAsync(movieForCreate);
 
             await fileManager.SaveFileAsync(uploadFileDto, movieForCreate.Id.ToString(), PathToPoster);
+
             await archiveDbContext.SaveChangesAsync();
         }
 

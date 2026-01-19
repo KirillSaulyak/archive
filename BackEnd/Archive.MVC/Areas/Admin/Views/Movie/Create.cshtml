@@ -17,16 +17,19 @@
     </div>
 </div>
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
     <div class="row mb-4 justify-content-center">
         <div class="col-3">
             <input asp-for="MovieCreateDto.Name" type="text" class="form-control" placeholder="Название">
+            <span asp-validation-for="MovieCreateDto.Name" class="text-danger"></span>
         </div>
         <div class="col-3">
             <input asp-for="MovieCreateDto.OriginalName" type="text" class="form-control" placeholder="Иностранное название">
+            <span asp-validation-for="MovieCreateDto.OriginalName" class="text-danger"></span>
         </div>
         <div class="col-3">
             <input asp-for="MovieCreateDto.Duration" type="number" class="form-control" placeholder="Длительность">
+            <span asp-validation-for="MovieCreateDto.Duration" class="text-danger"></span>
         </div>
     </div>
 
@@ -35,9 +38,10 @@
             <input type="date" asp-for="MovieCreateDto.Release" class="form-control" placeholder="Дата выхода">
         </div>
         <div class="col-3">
-            <select class="form-select" aria-label="Тип кино" asp-for="MovieCreateDto.CategoryIds" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
-                <option selected disabled>Тип кино</option>
+            <select class="form-select" aria-label="Категория кино" asp-for="MovieCreateDto.CategoryIds" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                <option selected disabled>Категория кино</option>
             </select>
+            <span asp-validation-for="MovieCreateDto.CategoryIds" class="text-danger"></span>
             <div class="row mt-2">
                 <div class="col">
                     <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#categoryCreateModal">Создать новый тип</button>
@@ -118,14 +122,21 @@
             <button type="button" class="btn btn-secondary" id="buttonUploadPoster">Добавить постер</button>
             <input asp-for="Poster" class="form-control" type="file" id="inputPoster" accept="image/*" hidden />
         </div>
+
         <div class="col-1">
             <img id="previewPoster" src="/images/DefaultMoviePoster.jpeg" alt="Превью" style="max-width: 150px;max-height: 180px;" />
+        </div>
+        <div class="row mb-4 justify-content-center">
+            <div class="col-3 d-flex align-items-center">
+                <span asp-validation-for="Poster" class="text-danger"></span>
+            </div>
         </div>
     </div>
 
     <div class="row mb-4 justify-content-center">
         <div class="col-9">
             <textarea asp-for="MovieCreateDto.Description" class="form-control" id="Description" placeholder="Описание" rows="3"></textarea>
+            <span asp-validation-for="MovieCreateDto.Description" class="text-danger"></span>
         </div>
     </div>
 
@@ -144,8 +155,8 @@
 @await Html.PartialAsync("../Theme/_ModalCreate.cshtml", new ThemeCreateDto(null))
 @await Html.PartialAsync("../Translator/_ModalCreate.cshtml", new TranslatorCreateDto(null))
 
-
 @section Scripts {
+    @await Html.PartialAsync("~/Views/Shared/_ValidationScriptsPartial.cshtml")
     <script src="/js/PreviewImage.js"></script>
     <script src="/js/ButtonInsteadOfInputFile.js"></script>
     <script>

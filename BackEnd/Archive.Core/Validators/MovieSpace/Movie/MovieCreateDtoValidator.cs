@@ -17,6 +17,8 @@ namespace Archive.Core.Validators.MovieSpace.Movie
                 .MaximumLength(200).WithMessage("Название не может превышать 200 символов");
             RuleFor(dto => dto.OriginalName)
                 .MaximumLength(200).WithMessage("Оригинальное название не может превышать 200 символов");
+            RuleFor(dto => dto.CategoryIds)
+                .NotEmpty().WithMessage("Категория кино обязательная для заполнения");
 
         }
     }

@@ -2,6 +2,7 @@ using Archive.Core.Abstractions.Common.Utilities;
 using Archive.Core.Abstractions.MovieSpace.Services.Admin;
 using Archive.Core.Mappers.MovieSpace.Admin;
 using Archive.Core.Validators.MovieSpace.Actor;
+using Archive.Core.Validators.MovieSpace.Movie;
 using Archive.Infrastructure.Persistence;
 using Archive.Infrastructure.Utilities;
 using Archive.Services.Abstractions.Factories.Common;
@@ -44,7 +45,8 @@ namespace Archive.MVC
             builder.Services.AddDbContext<ArchiveDbContext>(options => options.UseSqlServer(builder.Configuration[defaultConnectionDb]));
 
             //Validators
-            builder.Services.AddValidatorsFromAssemblyContaining<ActorCreateDtoValidator>();
+                       builder.Services.AddValidatorsFromAssemblyContaining<ActorCreateDtoValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<MovieCreateDtoValidator>();
 
             //Factories
             builder.Services.AddScoped<IMovieFilePathFactory, MovieFilePathFactory>();

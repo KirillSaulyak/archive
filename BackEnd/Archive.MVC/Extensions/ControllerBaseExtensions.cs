@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Archive.MVC.Extensions
 {
@@ -15,12 +16,24 @@ namespace Archive.MVC.Extensions
                 return true;
             }
 
+            string? prefix = null;
+
+            var modelMetadataProvider = controller.HttpContext.RequestServices.GetService<IModelMetadataProvider>();
+            if (modelMetadataProvider != null)
+            {
+                var modelMetadata = modelMetadataProvider.GetMetadataForType(typeof(T));
+                var modelName = modelMetadata.ModelType.Name;
+                prefix = modelName + ".";
+            }
+
+
             foreach (var error in result.Errors)
             {
-                controller.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                var key = string.IsNullOrEmpty(prefix) ? error.PropertyName : prefix + error.PropertyName;
+                controller.ModelState.AddModelError(key, error.ErrorMessage);
             }
 
             return false;
         }
     }
-} 
+}
