@@ -57,9 +57,11 @@ namespace Archive.Movie.MVC.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(Guid id)
         {
-            return View();
+            await movieService.GetMovieByIdForUpdateAsync(id);
+            return View(await CreateViewModelAsync());
         }
+
     }
 }

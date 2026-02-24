@@ -78,7 +78,7 @@ namespace Archive.MVC
                 config.AddProfile<TranslatorMapper>();
             });
 
-            //Для распределенного кэша в памяти, для SQL Server: AddSqlServerCache()
+            //Для распределенного кэша в памяти(ОЗУ), для SQL Server: AddSqlServerCache()
             builder.Services.AddDistributedMemoryCache();
 
             builder.Services.AddSession(options =>
@@ -134,14 +134,19 @@ namespace Archive.MVC
             });
 
             app.UseHttpsRedirection();
+
             app.UseRouting();
+
             app.UseAuthorization();
 
             app.MapStaticAssets();
+
             app.MapControllers();
+
             app.MapControllerRoute(
                 name: "areas",
                 pattern: "{area:exists}/{controller=Movie}/{action=Create}/{id?}");
+
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
